@@ -1,0 +1,1 @@
+Ici on met l’ensemble des fichiers du site dans leur arborescence fonctionnelle (dans un dossier « site »).
