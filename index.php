@@ -1,15 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php 
+    session_start();
+    require_once("function/base.php");
+    echo beginPage(array("css/style3.css"), 'ColLABoraWEB');
+    echo menu();
 
-<head>
-	<title>ColLABoraWEB</title>
-	<meta http-equiv="content-type" 
-		content="text/html;charset=utf-8" />
-	<link href="style3.css" rel="stylesheet" media="all" type="text/css"> 
-</head>
-
-<body>
+?>
 
 	<div class="wrap">
 
@@ -65,6 +60,6 @@
 		</div>
 	</div>
 
-</body>
-
-</html>
+<?php
+    echo endPage();
+?>

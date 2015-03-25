@@ -17,13 +17,12 @@
     
     function menu(){
         $menu = '<div class="menu">';
-        $menu .= '<a href="http://localhost/GuildeChroniqueurs/index.php">Accueil</a> ' ;
-        $menu .= '<a href="http://localhost/GuildeChroniqueurs/forum">Forum</a> ';
+        $menu .= '<a href="http://localhost/colaboraweb/index.php">Accueil</a> ' ;
         if(!isset($_SESSION['pseudo'])){
-            $menu.= '<a href="http://localhost/GuildeChroniqueurs/login/login.php">Connexion</a>';
+            $menu.= '<a href="http://localhost/colaboraweb/login/login.php">Connexion</a>';
         }
         else{
-            $menu.= '<a href="http://localhost/GuildeChroniqueurs/login/disconnect.php">Se déconnecter</a>';
+            $menu.= '<a href="http://localhost/colaboraweb/login/disconnect.php">Se déconnecter</a>';
         }
         $menu.= '</div>';
         return $menu;
