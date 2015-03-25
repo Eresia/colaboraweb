@@ -7,6 +7,10 @@ body{
   position: relative;
 }
 
+p{
+  font-family:  "Open Sans", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+}
+
 ul{
 
 }
@@ -47,14 +51,14 @@ li.icooth a{
  
 .header{
   position: relative;
-  background-color: #202099;
+  background-color: #1472CC;
   text-align: center;
   margin-right: 10%;
   margin-left: 10%;
 }
 
 .titre{
-  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+  font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
   font-size: 3vw;
 }
 
@@ -64,20 +68,21 @@ span.gras{
    color: #DB840F;
 }
 
-.l_menu{
+.h_menu{
   padding: 0; 
   margin: 0;
   text-align: center;
 }
 
-.l_menu li {
+.h_menu li {
   display: inline;
   list-style: none;
 }
 
-.l_menu a{
+.h_menu a{
     display: inline-block;
     margin: 0 0.3%;
+    font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
 
 .r_menu{
@@ -93,8 +98,9 @@ span.gras{
 .content{
   position: relative;
   padding-bottom: 100px;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: justify;
 }
 
 .footer {
@@ -103,7 +109,6 @@ span.gras{
   position: absolute;
   bottom: 0;
   left : 0;
-  background-color : #1472CC;
   text-align : center;
-
+  background-color : #1472CC;
 }

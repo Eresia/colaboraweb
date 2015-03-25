@@ -15,7 +15,7 @@
 
 		<div class="core">
 
-			<div class="l_menu">
+			<div class="h_menu">
 				<ul>
 					<li class="icohtml"><a href="rubhtml.php">(X)HTML</a></li>
 					<li class="icocss"><a href="rubcss.php">CSS</a></li>

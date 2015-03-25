@@ -7,6 +7,7 @@
         $beginText .= '<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>';
                 for($i = 0; $i < count($css); $i++){
                     $beginText .= '<link rel="stylesheet" href="'.$css[$i].'" />';
+                    $beginText .= '<link href="http://fonts.googleapis.com/css?family=Lobster|Orbitron:900|Oleo+Script+Swash+Caps:700|Denk+One|Open+Sans:600" rel="stylesheet" type="text/css">';
                 }
                 
                 $beginText .=  '<title>'.$titleHead.'</title>';
