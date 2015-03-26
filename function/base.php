@@ -23,7 +23,7 @@
             $menu.= '<a href="http://localhost/colaboraweb/login/login.php"><img src="images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log in</a>';
         }
         else{
-            $menu.= '<a href="http://localhost/colaboraweb/login/disconnect.php">Se déconnecter</a>';
+            $menu.= '<a href="http://localhost/colaboraweb/login/disconnect.php"><img src="images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log out</a>';
         }
         $menu.= '</div>';
         return $menu;
