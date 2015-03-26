@@ -4,18 +4,19 @@
     echo beginPage(array("css/style3.css"), 'ColLABoraWEB');
 
 ?>
-
+			
 	<div class="wrap">
 
 		<div class="header">
 			<p class="titre">Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></p>
+			<?php echo menu(); ?>
 		</div>
 
 
 
 		<div class="core">
 
-			<?php echo menu(); ?>
+			
 
 			<div class="h_menu">
 				<ul>

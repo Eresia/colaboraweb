@@ -70,13 +70,18 @@ span.gras{
 
 .c_menu{
   text-align: center;
+  background-color: #43789E;
 }
+
 
 .c_menu a{
   text-decoration: none;
   font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
   font-weight: bold;
   color : #DB840F;
+  position : relative;
+  left : 30%;
+  background-color: ;
 }
 
 .c_menu a:hover{
