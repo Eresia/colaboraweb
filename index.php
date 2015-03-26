@@ -2,7 +2,6 @@
     session_start();
     require_once("function/base.php");
     echo beginPage(array("css/style3.css"), 'ColLABoraWEB');
-    echo menu();
 
 ?>
 
@@ -13,7 +12,10 @@
 		</div>
 
 
+
 		<div class="core">
+
+			<?php echo menu(); ?>
 
 			<div class="h_menu">
 				<ul>

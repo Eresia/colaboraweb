@@ -17,10 +17,10 @@
     }
     
     function menu(){
-        $menu = '<div class="menu">';
-        $menu .= '<a href="http://localhost/colaboraweb/index.php">Accueil</a> ' ;
+        $menu = '<div class="c_menu">';
+        $menu .= '<a href="http://localhost/colaboraweb/index.php"><img src="images/home147.svg" width="2.5%" height="2.5%" alt="Acceuil"/>Home</a> ' ;
         if(!isset($_SESSION['pseudo'])){
-            $menu.= '<a href="http://localhost/colaboraweb/login/login.php">Connexion</a>';
+            $menu.= '<a href="http://localhost/colaboraweb/login/login.php"><img src="images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log in</a>';
         }
         else{
             $menu.= '<a href="http://localhost/colaboraweb/login/disconnect.php">Se déconnecter</a>';

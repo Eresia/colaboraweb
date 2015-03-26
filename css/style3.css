@@ -68,6 +68,21 @@ span.gras{
    color: #DB840F;
 }
 
+.c_menu{
+  text-align: center;
+}
+
+.c_menu a{
+  text-decoration: none;
+  font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+  font-weight: bold;
+  color : #DB840F;
+}
+
+.c_menu a:hover{
+  color : #1958FF;
+}
+
 .h_menu{
   padding: 0; 
   margin: 0;
@@ -83,6 +98,10 @@ span.gras{
     display: inline-block;
     margin: 0 0.3%;
     font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+}
+
+.h_menu a:hover{
+  color : #1958FF;
 }
 
 .r_menu{
