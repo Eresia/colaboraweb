@@ -7,12 +7,7 @@
 			
 	<div class="wrap">
 
-		<div class="header">
-			<p class="titre">Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></p>
-			<?php echo menu(); ?>
-		</div>
-
-
+        <?php echo headerPage(); ?>
 
 		<div class="core">
 
@@ -30,9 +25,7 @@
 			</div>
 
 
-			<div class="r_menu">
-				<p>TEST</p>
-			</div>
+			<?php echo rightMenu(); ?>
 
 
 			<div class="content">
@@ -64,21 +57,7 @@
 		</div>
 
 
-		<div class="footer">
-			<?php
-				$choos = rand(0,1);
-
-				if($choos==0){
-					echo "<p>Thomas LEFEBVRE &amp; Bastien LEPESANT  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>";
-				}
-				elseif($choos==1){
-					echo "<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>";
-				}		
-
-
-			?>
-			
-		</div>
+		<?php echo footerPage(); ?>
 	</div>
 
 <?php
