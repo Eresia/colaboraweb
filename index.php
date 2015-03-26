@@ -64,7 +64,19 @@
 
 
 		<div class="footer">
-			<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>
+			<?php
+				$choos = rand(0,1);
+
+				if($choos==0){
+					echo "<p>Thomas LEFEBVRE &amp; Bastien LEPESANT  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>";
+				}
+				elseif($choos==1){
+					echo "<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>";
+				}		
+
+
+			?>
+			
 		</div>
 	</div>
 
