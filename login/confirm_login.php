@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	require_once($_SERVER['DOCUMENT_ROOT']."colaboraweb/function/base.php");
 	require_once($_SERVER['DOCUMENT_ROOT']."colaboraweb/function/function_login.php");
 	if(!isset($_POST['pseudo'])){
 		$pseudo = "";

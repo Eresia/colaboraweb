@@ -62,10 +62,6 @@
     function disconnect(){
         if(isset($_SESSION['pseudo'])){
             session_destroy();
-            return "<p>Vous avez bien été déconnecté</p>";
-        }
-        else{
-            return "<p>Vous n'êtes pas connecté</p>";
         }
     }
 
