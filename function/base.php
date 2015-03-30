@@ -7,7 +7,7 @@
         $beginText .= '<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>'."\n";
                 for($i = 0; $i < count($css); $i++){
                     $beginText .= '<link rel="stylesheet" href="'.$css[$i].'" />'."\n";
-                    $beginText .= '<link href="http://fonts.googleapis.com/css?family=Lobster|Orbitron:900|Oleo+Script+Swash+Caps:700|Denk+One|Open+Sans:600" rel="stylesheet" type="text/css">'."\n";
+                    $beginText .= '<link href="http://fonts.googleapis.com/css?family=Lobster|Orbitron:900|Oleo+Script+Swash+Caps:700|Denk+One|Open+Sans:600" rel="stylesheet" type="text/css" />'."\n";
                 }
                 
                 $beginText .=  '<title>'.$titleHead.'</title>'."\n";
@@ -20,12 +20,12 @@
         $menu = '<div class="header">'."\n";
 		$menu .= '	<p class="titre">Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></p>'."\n";
         $menu .= '  <div class="c_menu">'."\n";
-        $menu .= '  <a href="http://localhost/colaboraweb/index.php"><img src="images/home147.svg" width="2.5%" height="2.5%" alt="Accueil"/>Home</a> ' ."\n";
+        $menu .= '  <a href="http://localhost/colaboraweb/index.php"><img src="http://localhost/colaboraweb/images/home147.svg" width="2.5%" height="2.5%" alt="Accueil"/>Home</a> ' ."\n";
         if(!isset($_SESSION['pseudo'])){
-            $menu.= '   <a href="http://localhost/colaboraweb/login/login.php"><img src="images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log in</a>'."\n";
+            $menu.= '   <a href="http://localhost/colaboraweb/login/login.php"><img src="http://localhost/colaboraweb/images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log in</a>'."\n";
         }
         else{
-            $menu.= '<a href="http://localhost/colaboraweb/login/disconnect.php"><img src="images/user155.svg" width="2.5%" height="2.5%" alt="Deconnexion"/>Log out</a>'."\n";
+            $menu.= '<a href="http://localhost/colaboraweb/login/disconnect.php"><img src="http://localhost/colaboraweb/images/user155.svg" width="2.5%" height="2.5%" alt="Deconnexion"/>Log out</a>'."\n";
         }
         $menu .= '   </div>'."\n";
         $menu .= '</div>'."\n";

@@ -7,7 +7,12 @@
 			if(file_exists(LOGIN_FILE)){
 				$file = fopen(LOGIN_FILE, "r+");
 				while($line = fgets($file)){
-					$id = strval(explode('\t', $line)[0]);
+					$values = explode("\t", $line);
+					if($values[1] == $pseudo){
+						fclose($file);
+						return false;
+					}
+					$id = strval($values[0]);
 					if($id > $idMax){
 						$idMax = $id;
 					}
@@ -18,7 +23,8 @@
 				$file = fopen(LOGIN_FILE, "w");
 			}
 			$right = 1;
-			fputs($file, ($idMax+1)."\t".$pseudo."\t".$pass."\t".$right."\n");
+			$passCrypt = password_hash($pass, PASSWORD_DEFAULT);
+			fputs($file, ($idMax+1)."\t".$pseudo."\t".$passCrypt."\t".$right."\n");
 			
 			fclose($file);
 			return true;
@@ -29,13 +35,28 @@
     }
     
     function login($pseudo, $pass){
-        if(isset($_SESSION['pseudo'])){
-            return "<p>Vous êtes déja connecté</p>";
-        }
-        else{
-            $_SESSION['pseudo'] = "test";
-            return "<p>Vous avez bien été connecté</p>";
-        }
+        if(right_pseudo($pseudo) && right_pass($pass)){
+			if(file_exists(LOGIN_FILE)){
+				$file = fopen(LOGIN_FILE, "r+");
+				while($line = fgets($file)){
+					$values = explode("\t", $line);
+					if(($values[1] == $pseudo) && ($values[2] == password_verify($pass, password_hash($pass, PASSWORD_DEFAULT)))){
+						fclose($file);
+						$_SESSION['pseudo'] = $pseudo;
+						$_SESSION['id'] = strval($values[0]);
+						return true;
+					}
+				}
+				fclose($file);
+				return false;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
     }
     
     function disconnect(){
