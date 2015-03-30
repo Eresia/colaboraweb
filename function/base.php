@@ -32,6 +32,20 @@
         return $menu;
     }
     
+    function topMenu(){
+        $menu = '<div class="h_menu">'."\n";
+        $menu .= '    <ul>'."\n";
+        $menu .= '        <li class="icohtml"><a href="rubhtml.php">(X)HTML</a></li>'."\n";
+        $menu .= '        <li class="icocss"><a href="rubcss.php">CSS</a></li>'."\n";
+        $menu .= '        <li class="icophp"><a href="rubphp.php">PHP</a></li>'."\n";
+        $menu .= '        <li class="icosql"><a href="rubmysql.php">MySQL</a></li>'."\n";
+        $menu .= '        <li class="icooth"><a href="ruboth.php">Autres</a></li>'."\n";
+        $menu .= '    </ul>'."\n";
+        $menu .= '</div>'."\n";
+        
+        return $menu;
+    }
+    
     function rightMenu(){
         $menu = '<div class="r_menu">'."\n";
 		$menu .= '  <p>TEST</p>'."\n";

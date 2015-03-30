@@ -11,21 +11,8 @@
 
 		<div class="core">
 
-			
-
-			<div class="h_menu">
-				<ul>
-					<li class="icohtml"><a href="rubhtml.php">(X)HTML</a></li>
-					<li class="icocss"><a href="rubcss.php">CSS</a></li>
-					<li class="icophp"><a href="rubphp.php">PHP</a></li>
-					<li class="icosql"><a href="rubmysql.php">MySQL</a></li>
-					<li class="icooth"><a href="ruboth.php">Autres</a></li>
-				</ul>
-
-			</div>
-
-
-			<?php echo rightMenu(); ?>
+			<?php echo topMenu();?>
+            <?php echo rightMenu(); ?>
 
 
 			<div class="content">
