@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once($_SERVER['DOCUMENT_ROOT']."colaboraweb/function/base.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/function/base.php");
     echo beginPage(array("http://localhost/colaboraweb/css/style3.css"), 'ColLABoraWEB');
 
 ?>

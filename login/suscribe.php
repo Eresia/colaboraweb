@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    require_once($_SERVER['DOCUMENT_ROOT']."colaboraweb/function/base.php");
-	require_once($_SERVER['DOCUMENT_ROOT']."colaboraweb/function/function_login.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/function/base.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/function/function_login.php");
     echo beginPage(array("http://localhost/colaboraweb/css/style3.css"), "S'inscrire");
 
 ?>
@@ -17,36 +17,48 @@
 
 			<div class="content">
 				<?php
+					$goodPseudo = false;
 					if(isset($_SESSION['pseudo'])){
 						echo '<p>Vous êtes déja connecté</p>';
 					}
 					else{
 						echo "<form method=\"post\" action=\"confirm_subscription.php\">";
 						if(isset($_GET['pseudo'])){
-							if((strlen($_GET['pseudo']) < 3) || (strlen($_GET['pseudo']) > 10)){
+							if(!right_pseudo($_GET['pseudo'])){
 								echo "<p>Merci de mettre un pseudo valide (entre 3 et 10 caractères)</p>";
 							}
 							else{
-								echo "<p>Pseudo invalide ou déjà utilisé</p>";
+								$goodPseudo = true;
 							}
 							$pseudo = $_GET['pseudo'];
 						}
 						else{
 							$pseudo = "";
 						}
-						
-						if(isset($_GET['password'])){
-							if(right_pseudo($pass)){
-								echo "<p>Merci de mettre un mot de passe valide (entre 3 et 10 caractères)</p>";
+						$goodPass = false;
+						if(isset($_GET['same'])){
+							if($_GET['same'] == "false"){
+								echo "<p>Les deux mots de passes ne sont pas égaux</p>";
 							}
-							$pass = $_GET['password'];
+							else{
+								if(isset($_GET['password'])){
+									if(!right_pass($_GET['password'])){
+										echo "<p>Merci de mettre un mot de passe valide (entre 3 et 10 caractères)</p>";
+									}
+									else{
+										$goodPass = true;
+									}
+								}
+							}
 						}
-						else{
-							$pass = "";
+						
+						if($goodPseudo && $goodPass){
+							echo "<p>Pseudo invalide ou déjà utilisé</p>";
 						}
 						
 						echo "<p>Pseudo : <input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" /></p>";
-						echo "<p>Mot de passe : <input type=\"password\" name=\"pass\" value=\"".$pass."\" /></p>";
+						echo "<p>Mot de passe : <input type=\"password\" name=\"pass\" /></p>";
+						echo "<p>Confirmer votre mot de passe : <input type=\"password\" name=\"confirmpass\" /></p>";
 						echo "<p><input type=\"submit\" value=\"Valider\" /></p>";
 						 
 						echo "</form>";
