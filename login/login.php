@@ -1,8 +1,10 @@
 <?php 
     session_start();
-    require_once($_SERVER['DOCUMENT_ROOT']."/function/base.php");
-	require_once($_SERVER['DOCUMENT_ROOT']."/function/function_login.php");
-    echo beginPage(array("http://localhost/colaboraweb/css/style3.css"), 'Se connecter');
+    define("HTTP_ROOT", ($_SERVER['HTTP_HOST'] == "localhost")?"http://localhost/colaboraweb":"http://".$_SERVER['HTTP_HOST']);
+	define("SERV_ROOT", ($_SERVER['HTTP_HOST'] == "localhost")?$_SERVER['DOCUMENT_ROOT']."/colaboraweb":$_SERVER['DOCUMENT_ROOT']);
+    require_once(SERV_ROOT."/function/base.php");
+	require_once(SERV_ROOT."/function/function_login.php");
+    echo beginPage(array(HTTP_ROOT."/css/style3.css"), 'Se connecter');
 
 ?>
 			

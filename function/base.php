@@ -20,12 +20,12 @@
         $menu = '<div class="header">'."\n";
 		$menu .= '	<p class="titre">Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></p>'."\n";
         $menu .= '  <div class="c_menu">'."\n";
-        $menu .= '  <a href="'.$_SERVER['DOCUMENT_ROOT'].'/index.php"><img src="http://localhost/colaboraweb/images/home147.svg" width="2.5%" height="2.5%" alt="Accueil"/>Home</a> ' ."\n";
+        $menu .= '  <a href="'.HTTP_ROOT.'/index.php"><img src="'.HTTP_ROOT.'/images/home147.svg" width="2.5%" height="2.5%" alt="Accueil"/>Home</a> ' ."\n";
         if(!isset($_SESSION['pseudo'])){
-            $menu.= '   <a href="'.$_SERVER['DOCUMENT_ROOT'].'/login/login.php"><img src="http://localhost/colaboraweb/images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log in</a>'."\n";
+            $menu.= '   <a href="'.HTTP_ROOT.'/login/login.php"><img src="'.HTTP_ROOT.'/images/user155.svg" width="2.5%" height="2.5%" alt="Connexion"/>Log in</a>'."\n";
         }
         else{
-            $menu.= '<a href="'.$_SERVER['DOCUMENT_ROOT'].'/login/disconnect.php"><img src="http://localhost/colaboraweb/images/user155.svg" width="2.5%" height="2.5%" alt="Deconnexion"/>Log out</a>'."\n";
+            $menu.= '<a href="'.HTTP_ROOT.'/login/disconnect.php"><img src="'.HTTP_ROOT.'/images/user155.svg" width="2.5%" height="2.5%" alt="Deconnexion"/>Log out</a>'."\n";
         }
         $menu .= '   </div>'."\n";
         $menu .= '</div>'."\n";
