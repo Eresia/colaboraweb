@@ -19,7 +19,7 @@
 
 			<div class="content">
 				<?php
-				
+
 					if(isset($_SESSION['pseudo'])){
 						echo '<p>Vous êtes déja connecté</p>';
 					}
@@ -43,7 +43,7 @@
 						echo "<label for=\"pseudo\" class=\"ps\">Pseudo : </label><input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" class=\"ps\" /><br/>";
 						echo "<label for=\"mdp\" class= \"mdp\">Mot de passe : </label><input type=\"password\" name=\"pass\" value=\"".$pass."\" class=\"mdp\"/>";
 						echo "<p class=\"okb\"><input type=\"submit\" value=\"Valider\" /></p>";
-						echo "<p class=\"subscribe\"><a href=\"suscribe.php\" class=\"subscribe\">S'inscrire</a></p>"; 
+						echo "<p class=\"subscribe\"><a href=\"subscribe.php\" class=\"subscribe\">S'inscrire</a></p>"; 
 						echo "</form>";
 						
 					}
