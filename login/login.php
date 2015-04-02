@@ -19,6 +19,7 @@
 
 			<div class="content">
 				<?php
+				
 					if(isset($_SESSION['pseudo'])){
 						echo '<p>Vous êtes déja connecté</p>';
 					}
