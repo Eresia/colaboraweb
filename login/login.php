@@ -23,7 +23,7 @@
 						echo '<p>Vous êtes déja connecté</p>';
 					}
 					else{
-						echo "<form method=\"post\" action=\"confirm_login.php\">";
+						echo "<form method=\"post\" action=\"confirm_login.php\" class=\"log_form\">";
 						if(isset($_GET['pseudo'])){
 							$pseudo = $_GET['pseudo'];
 							echo "<p>Mauvaise combinaison pseudo/mot de passe</p>";
@@ -39,12 +39,12 @@
 							$pass = "";
 						}
 						
-						echo "<p>Pseudo : <input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" /></p>";
-						echo "<p>Mot de passe : <input type=\"password\" name=\"pass\" value=\"".$pass."\" /></p>";
-						echo "<p><input type=\"submit\" value=\"Valider\" /></p>";
-						 
+						echo "<label for=\"pseudo\" class=\"ps\">Pseudo : </label><input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" class=\"ps\" /><br/>";
+						echo "<label for=\"mdp\" class= \"mdp\">Mot de passe : </label><input type=\"password\" name=\"pass\" value=\"".$pass."\" class=\"mdp\"/>";
+						echo "<p class=\"okb\"><input type=\"submit\" value=\"Valider\" /></p>";
+						echo "<p class=\"subscribe\"><a href=\"suscribe.php\" class=\"subscribe\">S'inscrire</a></p>"; 
 						echo "</form>";
-						echo "<p><a href=\"suscribe.php\">S'incrire</a></p>";
+						
 					}
 				?>
 			</div>
