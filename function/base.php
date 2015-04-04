@@ -48,7 +48,16 @@
     
     function rightMenu(){
         $menu = '<div class="r_menu">'."\n";
-		$menu .= '  <p>TEST</p>'."\n";
+		if(isset($_SESSION['id'])){
+			$menu .= '  <p>'.$_SESSION['pseudo'].'</p>'."\n";
+			$menu .= '  <p><a href="">Profil</a></p>'."\n";
+			if($_SESSION['group'] == 3){
+				$menu .= '  <p><a href="">Administration</a></p>'."\n";
+			}
+		}
+		else{
+			$menu .= '  <p>Bienvenue Visiteur</p>'."\n";
+		}
 		$menu .= '</div>';
         return $menu;
     }
