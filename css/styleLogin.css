@@ -1,0 +1,47 @@
+/*
+CSS SPECIFIQUE A login.php
+Formulaire de connexion au site
+*/
+
+.log_form{
+  background-color: #1472CC;
+}
+
+input.ps, input.mdp{
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+ }
+
+input.ps:focus, input.mdp:focus{
+  outline: 0;
+  border-color: #DB840F;
+}
+
+p.subscribe{
+  text-align: center;
+}
+
+a.subscribe{
+  display : block;
+  text-decoration: none;
+  background-color: #FFFFFF;
+  border: 1px solid black;
+  color : #000000;
+  font-size: 2em;
+
+}
+
+a.subscribe:hover{
+  color : #1958FF;
+}
+
+label.ps, label.mdp
+{
+  display: block;
+  width: 105px;
+  float: left;
+  font-family: "Open Sans", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif; 
+  font-size: 13px;
+}

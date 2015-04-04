@@ -1,7 +1,8 @@
 <?php
 	define("LOGIN_FILE", '../login/login.csv');
-	define('AVATAR_WIDTH', 200);
-	define('AVATAR_HEIGHT', 150);
+	define('AVATAR_WIDTH', 80);
+	define('AVATAR_HEIGHT', 80);
+	define('AVATAR_DEFAULT', HTTP_ROOT.'/images/avatar_default.gif');
 	require_once(SERV_ROOT.'/define/mysql_define.php');
 	
 	function get_id($pseudo){

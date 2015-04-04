@@ -4,5 +4,5 @@
 	define("SERV_ROOT", (strstr($_SERVER['HTTP_HOST'], 'localhost') != false)?$_SERVER['DOCUMENT_ROOT']."/colaboraweb":$_SERVER['DOCUMENT_ROOT']);
 	require_once(SERV_ROOT."/function/function_login.php");
     disconnect();
-	header('Location: '.HTTP_ROOT.'/colaboraweb/index.php');
+	header('Location: '.HTTP_ROOT.'/index.php');
 ?>

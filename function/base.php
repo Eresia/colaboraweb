@@ -7,8 +7,8 @@
         $beginText .= '<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>'."\n";
                 for($i = 0; $i < count($css); $i++){
                     $beginText .= '<link rel="stylesheet" href="'.$css[$i].'" />'."\n";
-                    $beginText .= '<link href="http://fonts.googleapis.com/css?family=Lobster|Orbitron:900|Oleo+Script+Swash+Caps:700|Denk+One|Open+Sans:600" rel="stylesheet" type="text/css" />'."\n";
                 }
+				$beginText .= '<link href="http://fonts.googleapis.com/css?family=Lobster|Orbitron:900|Oleo+Script+Swash+Caps:700|Denk+One|Open+Sans:600" rel="stylesheet" type="text/css" />'."\n";
                 
                 $beginText .=  '<title>'.$titleHead.'</title>'."\n";
             $beginText .= '</head>'."\n";
@@ -50,7 +50,7 @@
         $menu = '<div class="r_menu">'."\n";
 		if(isset($_SESSION['id'])){
 			$menu .= '  <p>'.$_SESSION['pseudo'].'</p>'."\n";
-			$menu .= '  <p><a href="">Profil</a></p>'."\n";
+			$menu .= '  <p><a href="'.HTTP_ROOT.'/profil/edit_profil.php">Profil</a></p>'."\n";
 			if($_SESSION['group'] == 3){
 				$menu .= '  <p><a href="">Administration</a></p>'."\n";
 			}
