@@ -21,30 +21,29 @@
 		if($id != null){
 			$info = get_info($id, array('avatar', 'date_inscription', 'description', 'sign'));
 			
-			echo '			<div class="profil_name">';
-			echo '				<p>'.$_GET['name'].'</p>';
-			echo '			</div>';
+			echo '		<div class="profil_name">';
+			echo '			<p>'.$_GET['name'].'</p>';
+			echo '		</div>';
 			
-			echo '			<div class=profil_date>';
-			echo '				<p>Date d\'inscription : '.$info['date_inscription'].'</p>';
-			echo '			</div>';
+			echo '		<div class="profil_date">';
+			echo '			<p>Date d\'inscription : '.$info['date_inscription'].'</p>';
+			echo '		</div>';
 			
-			echo '			<div class="profil_content">';
+			echo '		<div class="profil_content">';
 			if(strlen($info['avatar']) != 0){
 				$avatar = $info['avatar'];
 			}
 			else{
 				$avatar = AVATAR_DEFAULT;
 			}
-			echo '				<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="" />';
-			echo '				<p>Description : '.$info['description'].'</p>';
-			echo '				<p>Signature : '.$info['sign'].'</p>';
-			echo '			</div>';
+			echo '			<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="" title="Avatar de '.$_GET['name'].'" />';
+			echo '			<p>Description : '.$info['description'].'</p>';
+			echo '			<p>Signature : '.$info['sign'].'</p>';
+			echo '		</div>';
 		}
 		else{
 			echo "<p>Profil inconnu</p>";
 		}
-		echo '			</div>';
 		echo '		</div>';
 		echo '	</div>';
 		echo footerPage();

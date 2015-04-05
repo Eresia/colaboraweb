@@ -1,5 +1,5 @@
 <?php
-	define("LOGIN_FILE", '../login/login.csv');
+	define("LOGIN_FILE", SERV_ROOT.'/login/login.csv');
 	define('AVATAR_WIDTH', 80);
 	define('AVATAR_HEIGHT', 80);
 	define('AVATAR_DEFAULT', HTTP_ROOT.'/images/avatar_default.gif');
@@ -49,5 +49,28 @@
 			return null;
 		}
 	
+	}
+	
+	function set_info($id, $updateInfo){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$request = 'UPDATE profil SET ';
+		$str = "";
+		$info = array();
+		$param = array(&$str);
+		foreach($updateInfo as $key => $value){
+			$request .= $key;
+			$info[] = $value;
+			$param[] = &$info[count($info) - 1];
+			$str .= 's';
+			$request .= ' = ?, ';
+		}
+		$request = substr($request, 0, -2);
+		$request .= ' WHERE id = ?';
+		$param[] = &$id;
+		$str .= 'i';
+		$update = $mysql->prepare($request);
+		print_r($param);
+		call_user_func_array(array($update, "bind_param"), $param);
+		$update->execute();
 	}
 ?>

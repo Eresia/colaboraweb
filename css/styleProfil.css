@@ -1,3 +1,18 @@
+.profil_message_validate, .profil_message_error{
+	position: relative;
+	text-align: center;
+	margin-right: 30%;
+	margin-left: 30%;
+}
+
+.profil_message_validate{
+	background-color: #87FF75;
+}
+
+.profil_message_error{
+	background-color: #FF776D;
+}
+
 .profil_name{
 	text-align: center;
 	font-size: x-large;

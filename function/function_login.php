@@ -1,5 +1,5 @@
 <?php
-	define("LOGIN_FILE", 'login.csv');
+	define("LOGIN_FILE", SERV_ROOT.'/login/login.csv');
 	
 	require_once(SERV_ROOT.'/define/mysql_define.php');
     
