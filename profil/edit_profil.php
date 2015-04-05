@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once("../define/root_define.php");
+	require_once(SERV_ROOT.'/define/mysql_define.php');
 	require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_profil.php");
 	
@@ -9,12 +10,9 @@
 	}
 	else{
 		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_SESSION['pseudo']);
-		echo '<div class="wrap">';
-		echo headerPage();
-		echo '	<div class="core">';
-		echo topMenu();
-		echo rightMenu();
-		echo '		<div class="content">';
+		
+		echo begin_content();
+		
 		if(isset($_GET['msg']) && isset($_GET['result'])){
 			if($_GET['result'] == 'true'){
 				echo '<div class="profil_message_validate"><p>'.$_GET['msg'].'</p></div>';
@@ -50,11 +48,10 @@
 		echo '				</form>';
 		
 		echo '			</div>';
-		echo '		</div>';
-		echo '	</div>';
-		echo footerPage();
-		echo '</div>';
+		
+		echo end_content();
+		
+		echo endPage();
 	}
 	
-	echo endPage();
 ?>

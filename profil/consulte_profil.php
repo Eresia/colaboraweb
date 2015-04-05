@@ -1,19 +1,19 @@
 <?php
 	session_start();
 	require_once("../define/root_define.php");
+	require_once(SERV_ROOT.'/define/mysql_define.php');
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_profil.php");
+	
 	if(!isset($_GET['name'])){
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
+	
 	else{
 		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_GET['name']);
-		echo '<div class="wrap">';
-		echo headerPage();
-		echo '	<div class="core">';
-		echo topMenu();
-		echo rightMenu();
-		echo '		<div class="content">';
+		
+		echo begin_content();
+		
 		$id = get_id($_GET['name']);
 		
 		if($id != null){
@@ -42,10 +42,9 @@
 		else{
 			echo "<p>Profil inconnu</p>";
 		}
-		echo '		</div>';
-		echo '	</div>';
-		echo footerPage();
-		echo '</div>';
+		
+		echo end_content();
+		
 		echo endPage();
 	}
 ?>

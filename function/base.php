@@ -61,6 +61,29 @@
 		$menu .= '</div>';
         return $menu;
     }
+	
+	function begin_content(){
+		$result = '<div class="wrap">'."\n";
+        $result .= headerPage();
+		$result .= '	<div class="core">'."\n";
+
+		$result .= topMenu();
+        $result .= rightMenu();
+
+		$result .= '		<div class="content">'."\n";
+			
+		return $result;
+	}
+	
+	function end_content(){
+		$result = '		</div>'."\n";
+		$result .= '	</div>'."\n";
+
+		$result .= footerPage();
+		$result .= '</div>'."\n";
+		
+		return $result;
+	}
     
     function footerPage(){
         $footer = '<div class="footer">'."\n";

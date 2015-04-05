@@ -1,0 +1,32 @@
+.post{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	/*border: 1px solid black;*/
+}
+
+.info_author{
+	position: relative;
+	float: left;
+	font-size: x-small;
+}
+
+.message_name{
+	font-size: medium;
+}
+
+.info_post{
+	position: relative;
+	float: top;
+	font-size: x-small;
+}
+
+.content_post{
+	position: relative;
+}
+
+.display_url{
+	font-weight: bold;
+	font-size: large;
+	text-align: center;
+}

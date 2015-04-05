@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 04 Avril 2015 à 17:28
+-- Généré le :  Dim 05 Avril 2015 à 20:23
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -28,10 +28,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` int(11) NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 NOT NULL,
   `previous` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `previous`) VALUES
+(1, 'Other', 0);
 
 -- --------------------------------------------------------
 
@@ -42,11 +49,18 @@ CREATE TABLE IF NOT EXISTS `category` (
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` int(11) NOT NULL,
-  `comment` varchar(255) NOT NULL,
+  `comment` varchar(255) CHARACTER SET utf8 NOT NULL,
   `author` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `comment`
+--
+
+INSERT INTO `comment` (`id`, `url`, `comment`, `author`, `date`) VALUES
+(1, 1, 'Je confirme !!', 1, '2015-04-05');
 
 -- --------------------------------------------------------
 
@@ -72,9 +86,9 @@ CREATE TABLE IF NOT EXISTS `profil` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `date_inscription` date NOT NULL,
-  `avatar` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `sign` text NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL,
+  `sign` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -83,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `profil` (
 --
 
 INSERT INTO `profil` (`id`, `user`, `date_inscription`, `avatar`, `description`, `sign`) VALUES
-(1, 1, '2015-04-04', '', 'Co-fondateur du site', ''),
+(1, 1, '2015-04-04', 'http://img15.hostingpics.net/thumbs/mini_631494Eresia.png', 'Co-fondateur du site', 'Blabla'),
 (2, 2, '2015-04-04', '', 'Co-fondateur du site', '');
 
 -- --------------------------------------------------------
@@ -94,13 +108,20 @@ INSERT INTO `profil` (`id`, `user`, `date_inscription`, `avatar`, `description`,
 
 CREATE TABLE IF NOT EXISTS `url` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8 NOT NULL,
   `category` int(11) NOT NULL,
-  `description` text NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL,
   `author` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `url`
+--
+
+INSERT INTO `url` (`id`, `url`, `category`, `description`, `author`, `date`) VALUES
+(1, 'http://colaboraweb.wc.lt/index.php', 1, 'Site de partage d''URL (Il est génial)', 1, '2015-04-05');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

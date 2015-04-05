@@ -8,8 +8,6 @@
 	define('DESCRIPTION_MAX', 255);
 	define('SIGN_MAX', 255);
 	
-	require_once(SERV_ROOT.'/define/mysql_define.php');
-	
 	function get_id($pseudo){
 		$file = fopen(LOGIN_FILE, "r");
 		while($line = fgets($file)){
@@ -36,29 +34,10 @@
 		return null;
 	}
 	
-	/*function get_info($id, $infoAsked){
-		$info = array();
-		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
-		$dtbInfo = $mysql->prepare('SELECT date_inscription,avatar,description,sign FROM profil WHERE user=?');
-		$dtbInfo->bind_param('i', $id);
-		$dtbInfo->execute();
-		$dtbInfo->bind_result($info['date_inscription'], $info['avatar'], $info['description'], $info['sign']);
-		if($dtbInfo->fetch()){
-			$infoFinal = array();
-			for($i = 0; $i < count($infoAsked); $i++){
-				$infoFinal[$infoAsked[$i]] = $info[$infoAsked[$i]];
-			}
-			return $infoFinal;
-		}	
-		else{
-			return null;
-		}
-	
-	}*/
-	
 	function get_info($id, $infoAsked){
 		$info = array();
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
 		$request = 'SELECT ';
 		$param = array();
 		$info = array();
@@ -89,6 +68,7 @@
 	
 	function set_info($id, $updateInfo){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
 		$request = 'UPDATE profil SET ';
 		$str = "";
 		$info = array();
