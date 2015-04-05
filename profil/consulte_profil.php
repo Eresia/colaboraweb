@@ -5,8 +5,7 @@
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_profil.php");
 	if(!isset($_GET['name'])){
-		echo beginPage(array(HTTP_ROOT."/css/style3.css",), 'Aucun profil sélectionné');
-		echo "<p>Aucun profil sélectionné</p>";
+		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{
 		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_GET['name']);
@@ -48,7 +47,6 @@
 		echo '	</div>';
 		echo footerPage();
 		echo '</div>';
+		echo endPage();
 	}
-	
-	echo endPage();
 ?>

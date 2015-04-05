@@ -27,8 +27,15 @@
 	}
 	
 	if(isset($_POST['description'])){
-		$validDescription = true;
-		$description = htmlspecialchars($_POST['description'], ENT_QUOTES | ENT_XHTML, 'UTF-8');
+		if(strlen($_POST['description']) <= DESCRIPTION_MAX){
+			$validDescription = true;
+			$description = htmlspecialchars($_POST['description'], ENT_QUOTES | ENT_XHTML, 'UTF-8');
+		}
+		else{
+			$validDescription = false;
+			$msg = "Description trop longue, ".DESCRIPTION_MAX." caract max";
+			header('Location: edit_profil.php?msg='.$msg.'&result=false');
+		}
 	}
 	else{
 		$validDescription = false;
@@ -37,8 +44,15 @@
 	}
 	
 	if(isset($_POST['sign'])){
-		$validSign = true;
-		$sign = htmlspecialchars($_POST['sign'], ENT_QUOTES | ENT_XHTML, 'UTF-8');
+		if(strlen($_POST['sign']) <= SIGN_MAX){
+			$validSign = true;
+			$sign = htmlspecialchars($_POST['sign'], ENT_QUOTES | ENT_XHTML, 'UTF-8');
+		}
+		else{
+			$validSign = false;
+			$msg = "Signature trop longue, ".SIGN_MAX." caract max";
+			header('Location: edit_profil.php?msg='.$msg.'&result=false');
+		}
 	}
 	else{
 		$validSign = false;

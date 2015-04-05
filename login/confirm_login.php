@@ -17,10 +17,21 @@
 	}
 	
 	if(login($pseudo, $pass)){
-		header('Location: '.HTTP_ROOT.'/index.php');
+		if(isset($_POST['return']) && filter_var($_POST['return'], FILTER_VALIDATE_URL)){
+			header('Location: '.$_POST['return']);
+		}
+		else{
+			header('Location: '.HTTP_ROOT.'/index.php');
+		}
 	}
 	else{
-		header('Location: '.HTTP_ROOT.'/login/login.php?pseudo='.$pseudo.'&pass='.$pass);
+		if(isset($_POST['return'])){
+			$return = $_POST['return'];
+		}
+		else{
+			$return = "";
+		}
+		header('Location: '.HTTP_ROOT.'/login/login.php?return='.$return.'&pseudo='.$pseudo.'&pass='.$pass);
 	}
 	
 ?>

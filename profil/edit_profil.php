@@ -6,7 +6,7 @@
 	require_once(SERV_ROOT."/function/function_profil.php");
 	
 	if(!isset($_SESSION['pseudo'])){
-		header('Location: ../login/login.php');
+		header('Location: ../login/login.php?return=http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	}
 	else{
 		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_SESSION['pseudo']);
