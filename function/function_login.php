@@ -48,7 +48,7 @@
 				$file = fopen(LOGIN_FILE, "r");
 				while($line = fgets($file)){
 					$values = explode("\t", $line);
-					if(($values[1] == $pseudo) && ($values[2] == password_verify($pass, password_hash($pass, PASSWORD_DEFAULT)))){
+					if(($values[1] == $pseudo) && password_verify($pass, $values[2])){
 						fclose($file);
 						$_SESSION['pseudo'] = $pseudo;
 						$_SESSION['id'] = strval($values[0]);
