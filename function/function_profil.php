@@ -85,7 +85,6 @@
 		$param[] = &$id;
 		$str .= 'i';
 		$update = $mysql->prepare($request);
-		print_r($param);
 		call_user_func_array(array($update, "bind_param"), $param);
 		$update->execute();
 	}

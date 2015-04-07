@@ -1,4 +1,5 @@
 <?php 
+   	error_reporting(-1);
     session_start();
 	require_once("define/root_define.php");
     require_once(SERV_ROOT."/function/base.php");
