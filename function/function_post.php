@@ -17,7 +17,7 @@
 	function getComments($post, $page){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$askPage = $page * 10;
+		$askPage = ($page - 1) * 10;
 		$comments = $mysql->prepare('SELECT comment,author,date FROM comment WHERE url = ? ORDER BY date LIMIT 10 OFFSET ?');
 		$comments->bind_param('ii', $post, $askPage);
 		$comments->execute();
@@ -41,7 +41,7 @@
 		$result =  '<div class="post">'."\n";
 		$result .= '	<div class="info_author">'."\n";
 		$result .= '		<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />'."\n";
-		$result .= '		<p class="message_name">'.$name.'</p>'."\n";
+		$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
 		$result .= '		<p>Inscription : '.$info['date_inscription'].'</p>'."\n";
 		$result .= '	</div>'."\n";
 		$result .= '	<div class="info_post">'."\n";
@@ -68,7 +68,7 @@
 			$result =  '<div class="post">'."\n";
 			$result .= '	<div class="info_author">'."\n";
 			$result .= '		<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />'."\n";
-			$result .= '		<p class="message_name">'.$name.'</p>'."\n";
+			$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
 			$result .= '		<p>Inscription : '.$info['date_inscription'].'</p>'."\n";
 			$result .= '	</div>'."\n";
 			$result .= '	<div class="info_post">'."\n";
@@ -80,5 +80,34 @@
 			$result .= '</div>'."\n";
 			return $result;
 		}
+	}
+	
+	function get_nb_pages($post){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$comments = $mysql->prepare('SELECT COUNT(id) FROM comment WHERE url = ?');
+		$comments->bind_param('i', $post);
+		$comments->execute();
+		$comments->bind_result($result);
+		if($comments->fetch()){
+			return $result;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	function display_pages($page, $nbPages, $id){
+		echo '<div class="page"><p>Page ';
+		if($page > 1){
+			echo '<a href="">'.($page-1).'</a> ';
+		}
+		$url = HTTP_ROOT.'/profil/consulte_profil.php?id='.$id.'&page='.$page;
+		echo '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> ';
+		
+		if($page < $nbPages){
+			echo '<a href="">'.($page+1).'</a>';
+		}
+		echo '</p></div>'."\n";
 	}
 ?>

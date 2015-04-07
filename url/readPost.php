@@ -9,15 +9,16 @@
 	if(isset($_GET['id'])){
 		$id = intval($_GET['id']);
 		if(!isset($_GET['page'])){
-			$page = 0;
+			$page = 1;
 		}
 		else{
 			$page = intval($_GET['page']);
 		}
 		$post = getPost($id);
+		$nbPages = get_nb_pages($id);
 		$comments = getComments($id, $page);
 		
-		if(!empty($post) && (!empty($comments) || ($page == 0))){
+		if(!empty($post) && (!empty($comments) || ($page == 1))){
 			echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), 'Url '.$id);
 			
 			echo begin_content();
@@ -25,6 +26,8 @@
 			echo display_post($id, $post);
 			
 			echo display_comments($comments);
+			
+			echo display_pages($page, $nbPages, $id);
 			
 			echo end_content();
 			
