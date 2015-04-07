@@ -27,7 +27,7 @@
 			
 			echo display_comments($comments);
 			
-			echo display_pages($page, $nbPages, $id);
+			echo display_pages($page, $nbPages, get_pseudo($id));
 			
 			echo end_content();
 			

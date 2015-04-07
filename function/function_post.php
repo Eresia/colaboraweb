@@ -97,12 +97,12 @@
 		}
 	}
 	
-	function display_pages($page, $nbPages, $id){
+	function display_pages($page, $nbPages, $name){
 		echo '<div class="page"><p>Page ';
 		if($page > 1){
 			echo '<a href="">'.($page-1).'</a> ';
 		}
-		$url = HTTP_ROOT.'/profil/consulte_profil.php?id='.$id.'&page='.$page;
+		$url = HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'&page='.$page;
 		echo '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> ';
 		
 		if($page < $nbPages){
