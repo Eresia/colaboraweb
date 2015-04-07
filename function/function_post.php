@@ -31,7 +31,7 @@
 	
 	function display_post($id, $post){
 		$name = get_pseudo($id);
-		$info = get_info($id, array('avatar', 'date_inscription'));
+		$info = get_info($id, array('avatar', 'date_inscription', 'sign'));
 		if(strlen($info['avatar']) == 0){
 			$avatar = AVATAR_DEFAULT;
 		}
@@ -44,12 +44,16 @@
 		$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
 		$result .= '		<p>Inscription : '.$info['date_inscription'].'</p>'."\n";
 		$result .= '	</div>'."\n";
-		$result .= '	<div class="info_post">'."\n";
-		$result .= '		<p>Posté le : '.$post['date'].'</p>'."\n";
-		$result .= '	</div>'."\n";
 		$result .= '	<div class="content_post">'."\n";
+		$result .= '		<div class="info_post">'."\n";
+		$result .= '			<p>Posté le : '.$post['date'].'</p>'."\n";
+		$result .= '		</div>'."\n";
+		$result .= '		<div class="subcontent_post">'."\n";
 		$result .= '		<p class="display_url"><a href="'.$post['url'].'">'.$post['url'].'</a></p>'."\n";
 		$result .= '		<p>'.$post['description'].'</p>'."\n";
+		$result .= '		<hr />'."\n";
+		$result .= '		<p>'.$info['sign'].'</p>'."\n";
+		$result .= '		</div>'."\n";
 		$result .= '	</div>'."\n";
 		$result .= '</div>'."\n";
 		return $result;
@@ -58,7 +62,7 @@
 	function display_comments($comments){
 		for($i = 0; $i < count($comments); $i++){
 			$name = get_pseudo($comments[$i]['author']);
-			$info = get_info($comments[$i]['author'], array('avatar', 'date_inscription'));
+			$info = get_info($comments[$i]['author'], array('avatar', 'date_inscription', 'sign'));
 			if(strlen($info['avatar']) == 0){
 				$avatar = AVATAR_DEFAULT;
 			}
@@ -71,11 +75,15 @@
 			$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
 			$result .= '		<p>Inscription : '.$info['date_inscription'].'</p>'."\n";
 			$result .= '	</div>'."\n";
-			$result .= '	<div class="info_post">'."\n";
-			$result .= '		<p>Posté le : '.$comments[$i]['date'].'</p>'."\n";
-			$result .= '	</div>'."\n";
 			$result .= '	<div class="content_post">'."\n";
-			$result .= '		<p>'.$comments[$i]['comment'].'</p>'."\n";
+			$result .= '		<div class="info_post">'."\n";
+			$result .= '			<p>Posté le : '.$comments[$i]['date'].'</p>'."\n";
+			$result .= '		</div>'."\n";
+			$result .= '		<div class="subcontent_post">'."\n";
+			$result .= '			<p>'.$comments[$i]['comment'].'</p>'."\n";
+			$result .= '			<hr />'."\n";
+			$result .= '			<p>'.$info['sign'].'</p>'."\n";
+			$result .= '		</div>'."\n";
 			$result .= '	</div>'."\n";
 			$result .= '</div>'."\n";
 			return $result;

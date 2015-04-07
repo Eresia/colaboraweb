@@ -42,8 +42,8 @@
 		echo '				<form method="post" action="confirm_profil.php" class="profil_form">';
 		echo '					<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar" title="Avatar de '.$_SESSION['pseudo'].'" />';
 		echo '					<div><p>Lien de l\'avatar : </p> <input type="text" name="avatar" value="'.$info['avatar'].'" /></div>';
-		echo '					<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.$info['description'].'</textarea></div>';
-		echo '					<div><p>Signature : </p> <textarea rows="10" cols="100" name="sign">'.$info['sign'].'</textarea></div>';
+		echo '					<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.str_replace('<br />', "\n", $info['description']).'</textarea></div>';
+		echo '					<div><p>Signature : </p> <textarea rows="10" cols="100" name="sign">'.str_replace('<br />', "\n", $info['sign']).'</textarea></div>';
 		echo '					<div><input type="submit" value="Modifier" /></div>';
 		echo '				</form>';
 		

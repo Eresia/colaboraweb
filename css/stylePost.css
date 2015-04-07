@@ -1,28 +1,41 @@
 .post{
 	position: relative;
-	display: inline-block;
+	display: table;
 	width: 100%;
-	/*border: 1px solid black;*/
+	padding: 1em;
+	margin-bottom: 1em;
 }
 
 .info_author{
+	display: table-cell;
 	position: relative;
-	float: left;
 	font-size: x-small;
+	padding: 1em;
+	border: 1px solid black;
 }
 
 .message_name{
 	font-size: medium;
 }
 
-.info_post{
-	position: relative;
-	float: top;
-	font-size: x-small;
-}
-
 .content_post{
 	position: relative;
+	display: table-cell;
+	width: 100%;
+	vertical-align: top;
+}
+
+.info_post{
+	position: relative;
+	font-size: x-small;
+	padding: 1em;
+	border: 1px solid black;
+}
+
+.subcontent_post{
+	position: relative;
+	padding: 1em;
+	border: 1px solid black;
 }
 
 .display_url{

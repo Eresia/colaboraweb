@@ -29,7 +29,7 @@
 	if(isset($_POST['description'])){
 		if(strlen($_POST['description']) <= DESCRIPTION_MAX){
 			$validDescription = true;
-			$description = htmlspecialchars($_POST['description'], ENT_QUOTES | ENT_XHTML, 'UTF-8');
+			$description = str_replace("\n", '<br />', htmlspecialchars($_POST['description'], ENT_QUOTES | ENT_XHTML, 'UTF-8'));
 		}
 		else{
 			$validDescription = false;
@@ -46,7 +46,7 @@
 	if(isset($_POST['sign'])){
 		if(strlen($_POST['sign']) <= SIGN_MAX){
 			$validSign = true;
-			$sign = htmlspecialchars($_POST['sign'], ENT_QUOTES | ENT_XHTML, 'UTF-8');
+			$sign = str_replace("\n", '<br />', htmlspecialchars($_POST['sign'], ENT_QUOTES | ENT_XHTML, 'UTF-8'));
 		}
 		else{
 			$validSign = false;
