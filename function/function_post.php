@@ -127,12 +127,12 @@
 		$result = '<div class="page"><p>'.$dispPages.' : '."\n";
 		if($page > 1){
 			if($page > 3){
-				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=0';
-				$result .= '<a href="'.$url.'">0</a> ...'."\n";
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=1';
+				$result .= '<a href="'.$url.'">1</a> ...'."\n";
 			}
 			else if($page == 3){
-				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=0';
-				$result .= '<a href="'.$url.'">0</a>'."\n";
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=1';
+				$result .= '<a href="'.$url.'">1</a>'."\n";
 			}
 			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.($page-1);
 			$result .= '<a href="'.$url.'">'.($page-1).'</a> '."\n";
