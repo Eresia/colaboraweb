@@ -1,4 +1,7 @@
 <?php
+	define('NOTE_WIDTH', 40);
+	define('NOTE_HEIGHT', NOTE_WIDTH);
+
 	function getPost($post){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
@@ -9,7 +12,7 @@
 		if($info->fetch()){
 			$info->close();
 			$mysql->close();
-			return array('url' => $url, 'description' => $description, 'author' => $author, 'date' => $date);
+			return array('id' => $post, 'url' => $url, 'description' => $description, 'author' => $author, 'date' => $date);
 		}
 		else{
 			$info->close();
@@ -37,6 +40,8 @@
 	
 	function display_post($post){
 		$name = get_pseudo($post['author']);
+		$notes = get_note_img($post['id']);
+		$nbNotes = get_nb_notes($post['id']);
 		$info = get_info($post['author'], array('avatar', 'date_inscription', 'sign'));
 		if(strlen($info['avatar']) == 0){
 			$avatar = AVATAR_DEFAULT;
@@ -55,10 +60,20 @@
 		$result .= '			<p>Posté le : '.$post['date'].'</p>'."\n";
 		$result .= '		</div>'."\n";
 		$result .= '		<div class="subcontent_post">'."\n";
-		$result .= '		<p class="display_url"><a href="'.$post['url'].'">'.$post['url'].'</a></p>'."\n";
-		$result .= '		<p>'.$post['description'].'</p>'."\n";
-		$result .= '		<hr />'."\n";
-		$result .= '		<p>'.$info['sign'].'</p>'."\n";
+		$result .= '			<div class="display_url">'."\n";
+		$result .= '				<p><a href="'.$post['url'].'">'.$post['url'].'</a></p>'."\n";
+		$result .= '				<p class="img_note">';
+		for($i = 1; $i <= 5; $i++){
+			$result .= '<img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/>';
+		}
+		$result .= '</p>'."\n";
+		$result .= '				<p class="nb_notes">Note : '.($notes[0] / 2).'/5, Nombre de participation : '.$nbNotes.'</p>'."\n";
+		$result .= '			</div>'."\n";
+		$result .= '			<div class="display_description">'."\n";
+		$result .= '				<p>'.$post['description'].'</p>'."\n";
+		$result .= '				<hr />'."\n";
+		$result .= '				<p>'.$info['sign'].'</p>'."\n";
+		$result .= '			</div>'."\n";
 		$result .= '		</div>'."\n";
 		$result .= '	</div>'."\n";
 		$result .= '</div>'."\n";
@@ -127,28 +142,28 @@
 		$result = '<div class="page"><p>'.$dispPages.' : '."\n";
 		if($page > 1){
 			if($page > 3){
-				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=1';
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page=1';
 				$result .= '<a href="'.$url.'">1</a> ...'."\n";
 			}
 			else if($page == 3){
-				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=1';
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page=1';
 				$result .= '<a href="'.$url.'">1</a>'."\n";
 			}
-			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.($page-1);
+			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.($page-1);
 			$result .= '<a href="'.$url.'">'.($page-1).'</a> '."\n";
 		}
-		$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.$page;
+		$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.$page;
 		$result .= '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> '."\n";
 		
 		if($page < $nbPages){
-			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.($page+1);
+			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.($page+1);
 			$result .= '<a href="'.$url.'">'.($page+1).'</a>'."\n";
 			if($page < ($nbPages - 2)){
-				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.$nbPages;
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.$nbPages;
 				$result .= '... <a href="'.$url.'">'.$nbPages.'</a>'."\n";
 			}
 			else if($page == ($nbPages - 2)){
-				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.$nbPages;
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.$nbPages;
 				$result .= '<a href="'.$url.'">'.$nbPages.'</a>'."\n";
 			}
 		}
@@ -210,20 +225,14 @@
 	function is_url($id){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$prep = $mysql->prepare('SELECT id FROM url WHERE id = ?');
+		$prep = $mysql->prepare('SELECT COUNT(id) FROM url WHERE id = ?');
 		$prep->bind_param('i', $id);
 		$prep->execute();
-		$prep->store_result();
-		if($prep->num_rows == 1){
-			$prep->close();
-			$mysql->close();
-			return true;
-		}
-		else{
-			$prep->close();
-			$mysql->close();
-			return false;
-		}
+		$prep->bind_result($nb);
+		$prep->fetch();
+		$prep->close();
+		$mysql->close();
+		return ($nb == 1);
 	}
 	
 	function create_comment($author, $url, $comment){
@@ -235,5 +244,57 @@
 		$post->close();
 		
 		$mysql->close();
+	}
+	
+	function get_note($id){
+		$nbNotes = get_nb_notes($id);
+		if($nbNotes > 0){
+			$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+			$mysql->query("SET NAMES UTF8");
+			$allNotes = $mysql->prepare('SELECT note FROM note WHERE url = ?');
+			$allNotes->bind_param('i', $id);
+			$allNotes->execute();
+			$allNotes->bind_result($note);
+			$total = 0;
+			while($allNotes->fetch()){
+				$total += $note;
+			}		
+			$allNotes->close();
+			$mysql->close();
+			return $total / $nbNotes;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	function get_nb_notes($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$nbNote = $mysql->prepare('SELECT COUNT(id) FROM note WHERE url = ?');
+		$nbNote->bind_param('i', $id);
+		$nbNote->execute();
+		$nbNote->bind_result($nb);
+		$nbNote->fetch();
+		$nbNote->close();
+		$mysql->close();
+		return $nb;
+	}
+	
+	function get_note_img($id){
+		$note = get_note($id);
+		$result = array($note);
+		for($i = 0; $i < 5; $i++){
+			if($note <= ($i * 2)){
+				$result[$i+1] = 'empty';
+			}
+			else if($note == (($i * 2) + 1)){
+				$result[$i+1] = 'mid';
+			}
+			else{
+				$result[$i+1] = 'full';
+			}
+		}
+		return $result;
 	}
 ?>

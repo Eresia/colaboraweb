@@ -38,12 +38,24 @@
 	border: 1px solid black;
 }
 
-.display_url{
+.display_url {
+	text-align: center;
+}
+
+.nb_notes {
+	margin-top: 0;
+	font-size: small;
+}
+
+.display_url a{
 	font-weight: bold;
 	font-size: large;
-	text-align: center;
 }
 
 .create{
 	padding: 1em;
+}
+
+.img_note{
+	margin-bottom: 0;
 }
