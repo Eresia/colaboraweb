@@ -32,9 +32,11 @@
 			fclose($file);
 			$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 			$mysql->query("SET NAMES UTF8");
-			$insertProfil = $mysql->prepare("INSERT  INTO profil(user, date_inscription) VALUES(?, CURRENT_DATE())");
+			$insertProfil = $mysql->prepare("INSERT INTO profil(user, date_inscription) VALUES(?, CURRENT_DATE())");
 			$insertProfil->bind_param('i', $currentId);
 			$insertProfil->execute();
+			$insertProfil->close();
+			$mysql->close();
 			return true;
 		}
 		else{

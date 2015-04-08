@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Avril 2015 à 10:59
+-- Généré le :  Mer 08 Avril 2015 à 10:58
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
   `previous` int(11) NOT NULL,
+  `color` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -37,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Contenu de la table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `previous`) VALUES
-(1, 'Other', 0);
+INSERT INTO `category` (`id`, `name`, `previous`, `color`) VALUES
+(1, 'Other', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -90,14 +91,14 @@ CREATE TABLE IF NOT EXISTS `profil` (
   `description` text CHARACTER SET utf8 NOT NULL,
   `sign` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `profil`
 --
 
 INSERT INTO `profil` (`id`, `user`, `date_inscription`, `avatar`, `description`, `sign`) VALUES
-(1, 1, '2015-04-04', 'http://img15.hostingpics.net/thumbs/mini_631494Eresia.png', 'Co-fondateur du site', 'Blabla'),
+(1, 1, '2015-04-04', 'http://img15.hostingpics.net/thumbs/mini_631494Eresia.png', 'Co-fondateur du site', 'Blabla\r<br />\r<br />grande\r<br />\r<br />signature'),
 (2, 2, '2015-04-04', '', 'Co-fondateur du site', '');
 
 -- --------------------------------------------------------

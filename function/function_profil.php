@@ -58,9 +58,13 @@
 			for($i = 0; $i < count($infoAsked); $i++){
 				$infoFinal[$infoAsked[$i]] = $info[$i];
 			}
+			$dtbInfo->close();
+			$mysql->close();
 			return $infoFinal;
 		}	
 		else{
+			$dtbInfo->close();
+			$mysql->close();
 			return null;
 		}
 	
@@ -87,5 +91,7 @@
 		$update = $mysql->prepare($request);
 		call_user_func_array(array($update, "bind_param"), $param);
 		$update->execute();
+		$update->close();
+		$mysql->close();
 	}
 ?>

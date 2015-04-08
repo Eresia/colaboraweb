@@ -7,9 +7,13 @@
 		$info->execute();
 		$info->bind_result($url, $description, $author, $date);
 		if($info->fetch()){
+			$info->close();
+			$mysql->close();
 			return array('url' => $url, 'description' => $description, 'author' => $author, 'date' => $date);
 		}
 		else{
+			$info->close();
+			$mysql->close();
 			return array();
 		}
 	}
@@ -26,6 +30,8 @@
 		while($comments->fetch()){
 			$result[] = array('comment' => $currentComment, 'author' => $currentAuthor, 'date' => $currentDate);
 		}
+		$comments->close();
+		$mysql->close();
 		return $result;
 	}
 	
@@ -93,14 +99,18 @@
 	function get_nb_pages($post){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$comments = $mysql->prepare('SELECT COUNT(id) FROM comment WHERE url = ?');
-		$comments->bind_param('i', $post);
-		$comments->execute();
-		$comments->bind_result($result);
-		if($comments->fetch()){
+		$nb = $mysql->prepare('SELECT COUNT(id) FROM comment WHERE url = ?');
+		$nb->bind_param('i', $post);
+		$nb->execute();
+		$nb->bind_result($result);
+		if($nb->fetch()){
+			$nb->close();
+			$mysql->close();
 			return $result;
 		}
 		else{
+			$nb->close();
+			$mysql->close();
 			return 0;
 		}
 	}
@@ -117,5 +127,68 @@
 			echo '<a href="">'.($page+1).'</a>';
 		}
 		echo '</p></div>'."\n";
+	}
+	
+	function is_category($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$prep = $mysql->prepare('SELECT id FROM category WHERE id = ?');
+		$prep->bind_param('i', $id);
+		$prep->execute();
+		$prep->store_result();
+		if($prep->num_rows == 1){
+			$prep->close();
+			$mysql->close();
+			return true;
+		}
+		else{
+			$prep->close();
+			$mysql->close();
+			return false;
+		}
+	}
+	
+	function get_categories(){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$prep = $mysql->prepare('SELECT id, name FROM category');
+		$prep->execute();
+		$prep->bind_result($id, $name);
+		$result = array();
+		while($prep->fetch()){
+			$result[$id] = $name;
+		}
+		$prep->close();
+		$mysql->close();
+		return $result;
+	}
+	
+	function create_post($category, $author, $url, $description){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$previousPost = $mysql->prepare('SELECT id,previous FROM url WHERE category = ?');
+		$previousPost->bind_param("i", $category);
+		$previousPost->execute();
+		$previousPost->bind_result($id, $previous);
+		while($previousPost->fetch()){
+			$previous_tab[$previous] = $id;
+		}
+		$previousPost->close();
+		$maxPrevious = $previous_tab[0];
+		while(isset($previous_tab[$maxPrevious])){
+			$maxPrevious = $previous_tab[$maxPrevious];
+		}
+		$post = $mysql->prepare('INSERT INTO url(category, author, url, description, previous, date)  VALUES(?, ?, ?, ?, ?, CURRENT_DATE())');
+		$post->bind_param('iissi', $category, $author, $url, $description, $maxPrevious);
+		$post->execute();
+		$post->close();
+		
+		$max = $mysql->prepare('SELECT id FROM url ORDER BY id DESC LIMIT 0,1');
+		$max->execute();
+		$max->bind_result($result);
+		$max->fetch();
+		$max->close();
+		$mysql->close();
+		return $result;
 	}
 ?>
