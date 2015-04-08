@@ -35,9 +35,9 @@
 		return $result;
 	}
 	
-	function display_post($id, $post){
-		$name = get_pseudo($id);
-		$info = get_info($id, array('avatar', 'date_inscription', 'sign'));
+	function display_post($post){
+		$name = get_pseudo($post['author']);
+		$info = get_info($post['author'], array('avatar', 'date_inscription', 'sign'));
 		if(strlen($info['avatar']) == 0){
 			$avatar = AVATAR_DEFAULT;
 		}
@@ -66,6 +66,7 @@
 	}
 	
 	function display_comments($comments){
+		$result = '';
 		for($i = 0; $i < count($comments); $i++){
 			$name = get_pseudo($comments[$i]['author']);
 			$info = get_info($comments[$i]['author'], array('avatar', 'date_inscription', 'sign'));
@@ -75,7 +76,7 @@
 			else{
 				$avatar = $info['avatar'];
 			}
-			$result =  '<div class="post">'."\n";
+			$result .=  '<div class="post">'."\n";
 			$result .= '	<div class="info_author">'."\n";
 			$result .= '		<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />'."\n";
 			$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
@@ -92,8 +93,8 @@
 			$result .= '		</div>'."\n";
 			$result .= '	</div>'."\n";
 			$result .= '</div>'."\n";
-			return $result;
 		}
+		return $result;
 	}
 	
 	function get_nb_pages($post){
@@ -106,7 +107,7 @@
 		if($nb->fetch()){
 			$nb->close();
 			$mysql->close();
-			return $result;
+			return intval((($result - 1) / 10) + 1);
 		}
 		else{
 			$nb->close();
@@ -115,18 +116,44 @@
 		}
 	}
 	
-	function display_pages($page, $nbPages, $name){
-		echo '<div class="page"><p>Page ';
-		if($page > 1){
-			echo '<a href="">'.($page-1).'</a> ';
+	function display_pages($post, $page){
+		$nbPages = get_nb_pages($post);
+		if($nbPages > 1){
+			$dispPages = 'Pages';
 		}
-		$url = HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'&page='.$page;
-		echo '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> ';
+		else{
+			$dispPages = 'Page';
+		}
+		$result = '<div class="page"><p>'.$dispPages.' : '."\n";
+		if($page > 1){
+			if($page > 3){
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=0';
+				$result .= '<a href="'.$url.'">0</a> ...'."\n";
+			}
+			else if($page == 3){
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page=0';
+				$result .= '<a href="'.$url.'">0</a>'."\n";
+			}
+			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.($page-1);
+			$result .= '<a href="'.$url.'">'.($page-1).'</a> '."\n";
+		}
+		$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.$page;
+		$result .= '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> '."\n";
 		
 		if($page < $nbPages){
-			echo '<a href="">'.($page+1).'</a>';
+			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.($page+1);
+			$result .= '<a href="'.$url.'">'.($page+1).'</a>'."\n";
+			if($page < ($nbPages - 2)){
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.$nbPages;
+				$result .= '... <a href="'.$url.'">'.$nbPages.'</a>'."\n";
+			}
+			else if($page == ($nbPages - 2)){
+				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&page='.$nbPages;
+				$result .= '<a href="'.$url.'">'.$nbPages.'</a>'."\n";
+			}
 		}
-		echo '</p></div>'."\n";
+		$result .= '</p></div>'."\n";
+		return $result;
 	}
 	
 	function is_category($id){
@@ -166,20 +193,8 @@
 	function create_post($category, $author, $url, $description){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$previousPost = $mysql->prepare('SELECT id,previous FROM url WHERE category = ?');
-		$previousPost->bind_param("i", $category);
-		$previousPost->execute();
-		$previousPost->bind_result($id, $previous);
-		while($previousPost->fetch()){
-			$previous_tab[$previous] = $id;
-		}
-		$previousPost->close();
-		$maxPrevious = $previous_tab[0];
-		while(isset($previous_tab[$maxPrevious])){
-			$maxPrevious = $previous_tab[$maxPrevious];
-		}
-		$post = $mysql->prepare('INSERT INTO url(category, author, url, description, previous, date)  VALUES(?, ?, ?, ?, ?, CURRENT_DATE())');
-		$post->bind_param('iissi', $category, $author, $url, $description, $maxPrevious);
+		$post = $mysql->prepare('INSERT INTO url(category, author, url, description, date)  VALUES(?, ?, ?, ?, CURRENT_DATE())');
+		$post->bind_param('iiss', $category, $author, $url, $description);
 		$post->execute();
 		$post->close();
 		
@@ -190,5 +205,35 @@
 		$max->close();
 		$mysql->close();
 		return $result;
+	}
+	
+	function is_url($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$prep = $mysql->prepare('SELECT id FROM url WHERE id = ?');
+		$prep->bind_param('i', $id);
+		$prep->execute();
+		$prep->store_result();
+		if($prep->num_rows == 1){
+			$prep->close();
+			$mysql->close();
+			return true;
+		}
+		else{
+			$prep->close();
+			$mysql->close();
+			return false;
+		}
+	}
+	
+	function create_comment($author, $url, $comment){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('INSERT INTO comment(author, url, comment, date)  VALUES(?, ?, ?, CURRENT_DATE())');
+		$post->bind_param('iss', $author, $url, $comment);
+		$post->execute();
+		$post->close();
+		
+		$mysql->close();
 	}
 ?>
