@@ -15,7 +15,6 @@
 			$page = intval($_GET['page']);
 		}
 		$post = getPost($id);
-		$nbPages = get_nb_pages($id);
 		$comments = getComments($id, $page);
 		
 		if(!empty($post) && (!empty($comments) || ($page == 1))){
@@ -23,11 +22,11 @@
 			
 			echo begin_content();
 			
-			echo display_post($id, $post);
+			echo display_post($post);
 			
 			echo display_comments($comments);
 			
-			echo display_pages($page, $nbPages, get_pseudo($id));
+			echo display_pages($id, $page);
 			
 			echo end_content();
 			
