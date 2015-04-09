@@ -24,11 +24,11 @@
 		}
 	}
 	
-	if(suscribe($pseudo, $pass)){
+	if(subscribe($pseudo, $pass)){
 		header('Location: http://localhost/colaboraweb/index.php');
 	}
 	else{
-		header('Location: http://localhost/colaboraweb/login/suscribe.php?pseudo='.$pseudo.'&pass='.$pass.'&same='.$same);
+		header('Location: http://localhost/colaboraweb/login/@subscribe.php?pseudo='.$pseudo.'&pass='.$pass.'&same='.$same);
 	}
 	
 ?>

@@ -3,7 +3,7 @@
 	require_once("../define/root_define.php");
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_login.php");
-    echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleSuscribe.css"), "S'inscrire");
+    echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleSubscribe.css"), "S'inscrire");
 
 	echo begin_content();
 	

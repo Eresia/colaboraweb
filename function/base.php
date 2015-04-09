@@ -56,7 +56,10 @@
 			}
 		}
 		else{
-			$menu .= '  <p>Bienvenue Visiteur</p>'."\n";
+			$menu .= '  <p>
+                            Bienvenue Visiteur,
+                            vous pouvez vous INSCRIRE ou vous CONNECTER si vous désirez poster des liens et des commentaires.
+                        </p>'."\n";
 		}
 		$menu .= '</div>';
         return $menu;

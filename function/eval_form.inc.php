@@ -9,7 +9,7 @@
 
 	function rating(){
 
-	$disp = "Vous devez vous connecter avant de pouvoir noter ce lien :|";
+	$disp = "Vous devez vous connecter avant de pouvoir noter ce lien :-(";
 	$log = True;
 
 	if($log==False){

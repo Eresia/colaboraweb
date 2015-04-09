@@ -117,6 +117,8 @@ span.gras{
 .r_menu{
   position: relative;
   float: right;
+  width: 150px;
+  text-align: center;
   margin-right: 5%;
 
 }

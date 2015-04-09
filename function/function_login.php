@@ -3,7 +3,7 @@
 	
 	require_once(SERV_ROOT.'/define/mysql_define.php');
     
-    function suscribe($pseudo, $pass){
+    function subscribe($pseudo, $pass){
         if(right_pseudo($pseudo) && right_pass($pass)){
 			$idMax = 0;
 			if(file_exists(LOGIN_FILE)){

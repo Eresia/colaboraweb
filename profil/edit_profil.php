@@ -30,6 +30,7 @@
 		
 		echo '			<div class="profil_date">';
 		echo '				<p>Date d\'inscription : '.$info['date_inscription'].'</p>';
+		//echo '			<p class="consult_inslink">Consulter profil : <a href="./consulte_profil.php?name=Monsieur>Go</a></p>';
 		echo '			</div>';
 		
 		echo '			<div class="profil_content">';
