@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 09 Avril 2015 à 18:04
+-- Généré le :  Lun 13 Avril 2015 à 22:30
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -30,16 +30,17 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
   `previous` int(11) NOT NULL,
-  `color` smallint(6) NOT NULL DEFAULT '0',
+  `color` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `previous`, `color`) VALUES
-(1, 'Autre', 0, 0);
+(1, 'Autre', 2, 13224393),
+(2, 'SQL', 0, 11493458);
 
 -- --------------------------------------------------------
 
@@ -330,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `url` (
   `author` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `url`
@@ -338,7 +339,8 @@ CREATE TABLE IF NOT EXISTS `url` (
 
 INSERT INTO `url` (`id`, `url`, `category`, `description`, `author`, `date`) VALUES
 (1, 'http://colaboraweb.wc.lt/index.php', 1, 'Site de partage d''URL (Il est génial)', 1, '2015-04-05 00:00:00'),
-(7, 'https://real-debrid.com/', 1, 'Plutot un bon site', 1, '2015-04-08 00:00:00');
+(7, 'https://real-debrid.com/', 1, 'Plutot un bon site', 1, '2015-04-08 00:00:00'),
+(8, 'https://www.youtube.com/watch?v=Q0aBshM7x88', 2, 'Pokemon !!!!!!', 1, '2015-04-13 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

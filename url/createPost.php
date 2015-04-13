@@ -40,15 +40,22 @@
 		$list_categories = get_categories();
 		
 		$categories = "";
-		foreach($list_categories as $id => $values){
-			$categories = '<option value="'.$id.'">'.$values.'</option>';
+		$id = 0;
+		while(isset($list_categories[$id])){
+			if($category == $list_categories[$id]['id']){
+				$categories .= '<option value="'.$list_categories[$id]['id'].'" selected="selected">'.$list_categories[$id]['name'].'</option>';
+			}
+			else{
+				$categories .= '<option value="'.$list_categories[$id]['id'].'">'.$list_categories[$id]['name'].'</option>';
+			}
+			$id = $list_categories[$id]['id'];
 		}
 		
 		$result .= '<form method="post" action="confirm_post.php" class="post_form">';
-		$result .= '	<div><p>Catégorie : </p> <select name="category" />'.$categories.'</select></div>';
-		$result .= '	<div><p>URL : </p> <input type="text" name="url" value="'.$url.'" /></div>';
-		$result .= '	<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.$description.'</textarea></div>';
-		$result .= '	<div><input type="submit" value="Poster" /></div>';
+		$result .= '<div><p>Catégorie : </p> <select name="category" />'.$categories.'</select></div>';
+		$result .= '<div><p>URL : </p> <input type="text" name="url" value="'.$url.'" /></div>';
+		$result .= '<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.$description.'</textarea></div>';
+		$result .= '<div><input type="submit" value="Poster" /></div>';
 		$result .= '</form>';
 		
 		$result .= end_content();

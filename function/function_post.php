@@ -7,20 +7,49 @@
 	function getPost($post){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$info = $mysql->prepare('SELECT url,description,author,date FROM url WHERE id = ?');
+		$info = $mysql->prepare('SELECT url,description,author,date,category FROM url WHERE id = ?');
 		$info->bind_param('i', $post);
 		$info->execute();
-		$info->bind_result($url, $description, $author, $date);
+		$info->bind_result($url, $description, $author, $date, $category);
 		if($info->fetch()){
 			$info->close();
 			$mysql->close();
-			return array('id' => $post, 'url' => $url, 'description' => $description, 'author' => $author, 'date' => $date);
+			return array('id' => $post, 'url' => $url, 'description' => $description, 'author' => $author, 'date' => $date, 'category' => $category);
 		}
 		else{
 			$info->close();
 			$mysql->close();
 			return array();
 		}
+	}
+	
+	function get_post_by_category($category=-1, $date="asc", $notation="none"){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$request = 'SELECT url.id,url.url,url.description,url.author,url.date,url.category FROM url LEFT JOIN note ON url.id = note.url';
+		if($category != -1){
+			$request .= ' WHERE category = ?';
+		}
+		$request .= ' ORDER BY';
+		if($notation != 'none'){
+			$request .= ' note.note '.$notation.', url.date '.$date;
+		}
+		else{
+			$request .= ' url.date '.$date;
+		}
+		$info = $mysql->prepare($request);
+		if($category != -1){
+			$info->bind_param('i', $category);
+		}
+		$info->execute();
+		$info->bind_result($id, $url, $description, $author, $date, $category);
+		$result = array();
+		while($info->fetch()){
+			$result[] = array('id' => $id, 'url' => $url, 'description' => $description, 'author' => $author, 'date' => $date, 'category' => $category);
+		}
+		$info->close();
+		$mysql->close();
+		return $result;
 	}
 	
 	function getComments($post, $page){
@@ -40,7 +69,7 @@
 		return $result;
 	}
 	
-	function display_post($post, $notation=false){
+	function display_post($post, $notation=true){
 		$name = get_pseudo($post['author']);
 		$notes = get_note_img($post['id']);
 		$nbNotes = get_nb_notes($post['id']);
@@ -51,20 +80,20 @@
 		else{
 			$avatar = $info['avatar'];
 		}
-		$result =  '<div class="post">'."\n";
-		$result .= '	<div class="info_author">'."\n";
-		$result .= '		<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />'."\n";
-		$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
-		$result .= '		<p>Inscription : '.$info['date_inscription'].'</p>'."\n";
-		$result .= '	</div>'."\n";
-		$result .= '	<div class="content_post">'."\n";
-		$result .= '		<div class="info_post">'."\n";
-		$result .= '			<p>Posté le : '.$post['date'].'</p>'."\n";
-		$result .= '		</div>'."\n";
-		$result .= '		<div class="subcontent_post">'."\n";
-		$result .= '			<div class="display_url">'."\n";
-		$result .= '				<p><a href="'.$post['url'].'">'.$post['url'].'</a></p>'."\n";
-		$result .= '				<p class="img_note">';
+		$result =  '<div class="post">';
+		$result .= '<div class="info_author">';
+		$result .= '<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />';
+		$result .= '<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>';
+		$result .= '<p>Inscription : '.$info['date_inscription'].'</p>';
+		$result .= '</div>';
+		$result .= '<div class="content_post">';
+		$result .= '<div class="info_post">';
+		$result .= '<p>Posté le : '.$post['date'].', Catégorie : '.get_category_name($post['category']).'</p>';
+		$result .= '</div>';
+		$result .= '<div class="subcontent_post">';
+		$result .= '<div class="display_url">';
+		$result .= '<p><a href="'.$post['url'].'">'.$post['url'].'</a></p>';
+		$result .= '<p class="img_note">';
 		for($i = 1; $i <= 10; $i++){
 			if($notation){
 				$result .= '<a href="'.HTTP_ROOT.'/url/confirm_notation.php?id=&note='.$i.'"><img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/></a>';
@@ -73,17 +102,17 @@
 				$result .= '<img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/>';
 			}
 		}
-		$result .= '</p>'."\n";
-		$result .= '				<p class="nb_notes">Note : '.($notes[0] / 2).'/5, Nombre de participation : '.$nbNotes.'</p>'."\n";
-		$result .= '			</div>'."\n";
-		$result .= '			<div class="display_description">'."\n";
-		$result .= '				<p>'.$post['description'].'</p>'."\n";
-		$result .= '				<hr />'."\n";
-		$result .= '				<p>'.$info['sign'].'</p>'."\n";
-		$result .= '			</div>'."\n";
-		$result .= '		</div>'."\n";
-		$result .= '	</div>'."\n";
-		$result .= '</div>'."\n";
+		$result .= '</p>';
+		$result .= '<p class="nb_notes">Note : '.($notes[0] / 2).'/5, Nombre de participation : '.$nbNotes.'</p>';
+		$result .= '</div>';
+		$result .= '<div class="display_description">';
+		$result .= '<p>'.$post['description'].'</p>';
+		$result .= '<hr />';
+		$result .= '<p>'.$info['sign'].'</p>';
+		$result .= '</div>';
+		$result .= '</div>';
+		$result .= '</div>';
+		$result .= '</div>';
 		return $result;
 	}
 	
@@ -98,23 +127,23 @@
 			else{
 				$avatar = $info['avatar'];
 			}
-			$result .=  '<div class="post">'."\n";
-			$result .= '	<div class="info_author">'."\n";
-			$result .= '		<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />'."\n";
-			$result .= '		<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>'."\n";
-			$result .= '		<p>Inscription : '.$info['date_inscription'].'</p>'."\n";
-			$result .= '	</div>'."\n";
-			$result .= '	<div class="content_post">'."\n";
-			$result .= '		<div class="info_post">'."\n";
-			$result .= '			<p>Posté le : '.$comments[$i]['date'].'</p>'."\n";
-			$result .= '		</div>'."\n";
-			$result .= '		<div class="subcontent_post">'."\n";
-			$result .= '			<p>'.$comments[$i]['comment'].'</p>'."\n";
-			$result .= '			<hr />'."\n";
-			$result .= '			<p>'.$info['sign'].'</p>'."\n";
-			$result .= '		</div>'."\n";
-			$result .= '	</div>'."\n";
-			$result .= '</div>'."\n";
+			$result .=  '<div class="post">';
+			$result .= '<div class="info_author">';
+			$result .= '<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />';
+			$result .= '<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>';
+			$result .= '<p>Inscription : '.$info['date_inscription'].'</p>';
+			$result .= '</div>';
+			$result .= '<div class="content_post">';
+			$result .= '<div class="info_post">';
+			$result .= '<p>Posté le : '.$comments[$i]['date'].'</p>';
+			$result .= '</div>';
+			$result .= '<div class="subcontent_post">';
+			$result .= '<p>'.$comments[$i]['comment'].'</p>';
+			$result .= '<hr />';
+			$result .= '<p>'.$info['sign'].'</p>';
+			$result .= '</div>';
+			$result .= '</div>';
+			$result .= '</div>';
 		}
 		return $result;
 	}
@@ -146,35 +175,35 @@
 		else{
 			$dispPages = 'Page';
 		}
-		$result = '<div class="page"><p>'.$dispPages.' : '."\n";
+		$result = '<div class="page"><p>'.$dispPages.' : ';
 		if($page > 1){
 			if($page > 3){
 				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page=1';
-				$result .= '<a href="'.$url.'">1</a> ...'."\n";
+				$result .= '<a href="'.$url.'">1</a> ...';
 			}
 			else if($page == 3){
 				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page=1';
-				$result .= '<a href="'.$url.'">1</a>'."\n";
+				$result .= '<a href="'.$url.'">1</a>';
 			}
 			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.($page-1);
-			$result .= '<a href="'.$url.'">'.($page-1).'</a> '."\n";
+			$result .= '<a href="'.$url.'">'.($page-1).'</a> ';
 		}
 		$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.$page;
-		$result .= '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> '."\n";
+		$result .= '<span class="currentPage"><a href="'.$url.'">'.$page.'</a></span> ';
 		
 		if($page < $nbPages){
 			$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.($page+1);
-			$result .= '<a href="'.$url.'">'.($page+1).'</a>'."\n";
+			$result .= '<a href="'.$url.'">'.($page+1).'</a>';
 			if($page < ($nbPages - 2)){
 				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.$nbPages;
-				$result .= '... <a href="'.$url.'">'.$nbPages.'</a>'."\n";
+				$result .= '... <a href="'.$url.'">'.$nbPages.'</a>';
 			}
 			else if($page == ($nbPages - 2)){
 				$url = HTTP_ROOT.'/url/readPost.php?id='.$post.'&amp;page='.$nbPages;
-				$result .= '<a href="'.$url.'">'.$nbPages.'</a>'."\n";
+				$result .= '<a href="'.$url.'">'.$nbPages.'</a>';
 			}
 		}
-		$result .= '</p></div>'."\n";
+		$result .= '</p></div>';
 		return $result;
 	}
 	
@@ -197,15 +226,31 @@
 		}
 	}
 	
+	function get_category_name($category){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$prep = $mysql->prepare('SELECT name FROM category WHERE id = ?');
+		$prep->bind_param('i', $category);
+		$prep->execute();
+		$prep->bind_result($name);
+		if($prep->fetch()){
+			$prep->close();
+			$mysql->close();
+			return $name;
+		}
+		else{
+			$prep->close();
+			$mysql->close();
+			return null;
+		}
+	}
+	
 	function get_categories(){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$prep = $mysql->prepare('SELECT id, name FROM category');
-		$prep->execute();
-		$prep->bind_result($id, $name);
-		$result = array();
-		while($prep->fetch()){
-			$result[$id] = $name;
+		$prep = $mysql->query('SELECT id, name, previous FROM category');
+		while($result_query = $prep->fetch_assoc()){
+			$result[$result_query['previous']] = array('name' => $result_query['name'], 'id' => $result_query['id']);
 		}
 		$prep->close();
 		$mysql->close();

@@ -10,10 +10,10 @@
 		$result .= begin_content();
 		
 		$result .= '<div class="admin" id="admin_list">';
-		$result .= '	<ul>';
-		$result .= '		<li><a href="#admin_category">Categories</a></li>';
-		$result .= '		<li><a href="#admin_users">Utilisateurs</a></li>'; 
-		$result .= '	</ul>';
+		$result .= '<ul>';
+		$result .= '<li><a href="#admin_category">Categories</a></li>';
+		$result .= '<li><a href="#admin_users">Utilisateurs</a></li>'; 
+		$result .= '</ul>';
 		$result .= '</div>';
 		
 		$result .= '<div class="admin" id="admin_category">';
