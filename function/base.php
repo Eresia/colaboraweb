@@ -35,7 +35,7 @@
     function topMenu(){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$query_category = $mysql->query('SELECT * FROM category');
+		$query_category = $mysql->query('SELECT id,name,previous FROM category');
 		$menu = '<div class="h_menu">'."\n";
 		$menu .= '    <ul>'."\n";
 		$previous = array();
@@ -44,7 +44,7 @@
 		}
 		$id = 0;
 		while(isset($previous[$id])){
-			$menu .= '        <li class="icohtml"><a href="'.HTTP_ROOT.'/index.php?category='.$previous[$id]['id'].'">'.$previous[$id]['name'].'</a></li>'."\n";
+			$menu .= '        <li class="icohtml" id="'.$previous[$id]['name'].'"><a href="'.HTTP_ROOT.'/index.php?category='.$previous[$id]['id'].'">'.$previous[$id]['name'].'</a></li>'."\n";
 			$id = $previous[$id]['id'];
 		}
 		$menu .= '    </ul>'."\n";

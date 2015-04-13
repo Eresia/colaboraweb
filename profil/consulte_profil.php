@@ -10,7 +10,7 @@
 	}
 	
 	else{
-		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_GET['name']);
+		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleCategory.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_GET['name']);
 		
 		echo begin_content();
 		

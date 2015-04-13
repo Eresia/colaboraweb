@@ -16,7 +16,7 @@
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{
-		echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), "Créer un commentaire");
+		echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT."/css/styleCategory.css", HTTP_ROOT.'/css/stylePost.css'), "Créer un commentaire");
 	
 		echo begin_content();
 		

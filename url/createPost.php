@@ -13,7 +13,7 @@
 	}
 	else{
 		
-		echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), "Créer un post");
+		echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT."/css/styleCategory.css", HTTP_ROOT.'/css/stylePost.css'), "Créer un post");
 		
 		echo begin_content();
 		

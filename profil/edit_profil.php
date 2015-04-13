@@ -9,7 +9,7 @@
 		header('Location: '.HTTP_ROOT.'/login/login.php?return=http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	}
 	else{
-		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_SESSION['pseudo']);
+		echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleCategory.css", HTTP_ROOT."/css/styleProfil.css"), 'Profil de '.$_SESSION['pseudo']);
 		
 		echo begin_content();
 		

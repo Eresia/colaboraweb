@@ -18,7 +18,7 @@
 		$comments = getComments($id, $page);
 		
 		if(!empty($post) && (!empty($comments) || ($page == 1))){
-			echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), 'Url '.$id);
+			echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT."/css/styleCategory.css", HTTP_ROOT.'/css/stylePost.css'), 'Url '.$id);
 			
 			echo begin_content();
 			

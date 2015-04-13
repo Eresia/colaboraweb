@@ -4,7 +4,7 @@
 	require_once(SERV_ROOT.'/define/mysql_define.php');
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_post.php");
-    echo beginPage(array(HTTP_ROOT."/css/style3.css"), 'ColLABoraWEB');
+    echo beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleCategory.css"), 'ColLABoraWEB');
 
 	echo begin_content();
 ?>
