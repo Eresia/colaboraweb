@@ -33,15 +33,22 @@
     }
     
     function topMenu(){
-        $menu = '<div class="h_menu">'."\n";
-        $menu .= '    <ul>'."\n";
-        $menu .= '        <li class="icohtml"><a href="rubhtml.php">(X)HTML</a></li>'."\n";
-        $menu .= '        <li class="icocss"><a href="rubcss.php">CSS</a></li>'."\n";
-        $menu .= '        <li class="icophp"><a href="rubphp.php">PHP</a></li>'."\n";
-        $menu .= '        <li class="icosql"><a href="rubmysql.php">MySQL</a></li>'."\n";
-        $menu .= '        <li class="icooth"><a href="ruboth.php">Autres</a></li>'."\n";
-        $menu .= '    </ul>'."\n";
-        $menu .= '</div>'."\n";
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$query_category = $mysql->query('SELECT * FROM category');
+		$menu = '<div class="h_menu">'."\n";
+		$menu .= '    <ul>'."\n";
+		$previous = array();
+		while($category = $query_category->fetch_assoc()){
+			$previous[$category['previous']] = (new ArrayObject($category))->getArrayCopy();
+		}
+		$id = 0;
+		while(isset($previous[$id])){
+			$menu .= '        <li class="icohtml"><a href="'.HTTP_ROOT.'/index.php?category='.$previous[$id]['id'].'">'.$previous[$id]['name'].'</a></li>'."\n";
+			$id = $previous[$id]['id'];
+		}
+		$menu .= '    </ul>'."\n";
+		$menu .= '</div>'."\n";
         
         return $menu;
     }

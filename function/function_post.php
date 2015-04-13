@@ -1,6 +1,6 @@
 <?php
-	define('NOTE_WIDTH', 40);
-	define('NOTE_HEIGHT', NOTE_WIDTH);
+	define('NOTE_HEIGHT', 40);
+	define('NOTE_WIDTH', NOTE_HEIGHT/2);
 
 	function getPost($post){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
@@ -38,7 +38,7 @@
 		return $result;
 	}
 	
-	function display_post($post){
+	function display_post($post, $notation){
 		$name = get_pseudo($post['author']);
 		$notes = get_note_img($post['id']);
 		$nbNotes = get_nb_notes($post['id']);
@@ -63,8 +63,13 @@
 		$result .= '			<div class="display_url">'."\n";
 		$result .= '				<p><a href="'.$post['url'].'">'.$post['url'].'</a></p>'."\n";
 		$result .= '				<p class="img_note">';
-		for($i = 1; $i <= 5; $i++){
-			$result .= '<img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/>';
+		for($i = 1; $i <= 10; $i++){
+			if($notation){
+				$result .= '<a href="'.HTTP_ROOT.'/url/confirm_notation.php?id=&note='.$i.'"><img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/></a>';
+			}
+			else{
+				$result .= '<img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/>';
+			}
 		}
 		$result .= '</p>'."\n";
 		$result .= '				<p class="nb_notes">Note : '.($notes[0] / 2).'/5, Nombre de participation : '.$nbNotes.'</p>'."\n";
@@ -284,15 +289,22 @@
 	function get_note_img($id){
 		$note = get_note($id);
 		$result = array($note);
-		for($i = 0; $i < 5; $i++){
-			if($note <= ($i * 2)){
-				$result[$i+1] = 'empty';
-			}
-			else if($note == (($i * 2) + 1)){
-				$result[$i+1] = 'mid';
+		for($i = 0; $i < 10; $i++){
+			if($note <= $i){
+				if($i % 2 == 0){
+					$result[] = 'left_empty';
+				}
+				else{
+					$result[] = 'right_empty';
+				}
 			}
 			else{
-				$result[$i+1] = 'full';
+				if($i % 2 == 0){
+					$result[] = 'left_full';
+				}
+				else{
+					$result[] = 'right_full';
+				}
 			}
 		}
 		return $result;
