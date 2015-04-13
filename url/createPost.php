@@ -1,21 +1,13 @@
 <?php
 	session_start();
 	require_once("../define/root_define.php");
-	require_once(SERV_ROOT.'/define/mysql_define.php');
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_post.php");
 	
-	if(!isset($_SESSION['id'])){
-		header('Location: '.HTTP_ROOT.'/login/login.php?return=http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-	}
-	else if (!isset($_GET['category'])){
-		header('Location: '.HTTP_ROOT.'/index.php');
-	}
-	else{
+	function create_post_page(){
+		$result = beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), "Créer un post");
 		
-		echo beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT."/css/styleCategory.css", HTTP_ROOT.'/css/stylePost.css'), "Créer un post");
-		
-		echo begin_content();
+		$result .= begin_content();
 		
 		if(is_category(intval($_GET['category']))){
 			$category = intval($_GET['category']);
@@ -41,7 +33,7 @@
 		}
 		
 		if(isset($_SESSION['msg'])){
-			echo $_SESSION['msg'];
+			$result .= $_SESSION['msg'];
 			$_SESSION['msg'] = "";
 		}
 		
@@ -52,15 +44,27 @@
 			$categories = '<option value="'.$id.'">'.$values.'</option>';
 		}
 		
-		echo '<form method="post" action="confirm_post.php" class="post_form">';
-		echo '	<div><p>Catégorie : </p> <select name="category" />'.$categories.'</select></div>';
-		echo '	<div><p>URL : </p> <input type="text" name="url" value="'.$url.'" /></div>';
-		echo '	<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.$description.'</textarea></div>';
-		echo '	<div><input type="submit" value="Poster" /></div>';
-		echo '</form>';
+		$result .= '<form method="post" action="confirm_post.php" class="post_form">';
+		$result .= '	<div><p>Catégorie : </p> <select name="category" />'.$categories.'</select></div>';
+		$result .= '	<div><p>URL : </p> <input type="text" name="url" value="'.$url.'" /></div>';
+		$result .= '	<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.$description.'</textarea></div>';
+		$result .= '	<div><input type="submit" value="Poster" /></div>';
+		$result .= '</form>';
 		
-		echo end_content();
+		$result .= end_content();
 		
-		echo endPage();
+		$result .= endPage();
+		
+		return $result;
+	}
+	
+	if(!isset($_SESSION['id'])){
+		header('Location: '.HTTP_ROOT.'/login/login.php?return=http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+	}
+	else if (!isset($_GET['category'])){
+		header('Location: '.HTTP_ROOT.'/index.php');
+	}
+	else{
+		echo indent(create_post_page());
 	}
 ?>

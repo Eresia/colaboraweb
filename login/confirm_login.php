@@ -1,7 +1,6 @@
 <?php
 	session_start();
 	require_once("../define/root_define.php");
-	require_once(SERV_ROOT.'/define/mysql_define.php');
 	require_once(SERV_ROOT."/function/function_login.php");
 	if(!isset($_POST['pseudo'])){
 		$pseudo = "";

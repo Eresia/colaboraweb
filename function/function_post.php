@@ -1,6 +1,8 @@
 <?php
 	define('NOTE_HEIGHT', 40);
 	define('NOTE_WIDTH', NOTE_HEIGHT/2);
+	
+	require_once(SERV_ROOT.'/define/mysql_define.php');
 
 	function getPost($post){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
@@ -38,7 +40,7 @@
 		return $result;
 	}
 	
-	function display_post($post, $notation){
+	function display_post($post, $notation=false){
 		$name = get_pseudo($post['author']);
 		$notes = get_note_img($post['id']);
 		$nbNotes = get_nb_notes($post['id']);

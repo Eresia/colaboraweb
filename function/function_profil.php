@@ -8,6 +8,8 @@
 	define('DESCRIPTION_MAX', 255);
 	define('SIGN_MAX', 255);
 	
+	require_once(SERV_ROOT.'/define/mysql_define.php');
+	
 	function get_id($pseudo){
 		$file = fopen(LOGIN_FILE, "r");
 		while($line = fgets($file)){
