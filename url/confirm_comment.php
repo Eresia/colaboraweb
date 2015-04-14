@@ -4,12 +4,10 @@
 	require_once(SERV_ROOT."/function/function_post.php");
 	
 	if(!isset($_SESSION['id'])){
-		echo "a";
-		//header('Location: '.HTTP_ROOT.'/login/login.php');
+		header('Location: '.HTTP_ROOT.'/login/login.php');
 	}
 	else if(!isset($_POST['url']) || !is_url(intval($_POST['url'])) || !isset($_POST['comment'])){
-		echo "b";
-		//header('Location: '.HTTP_ROOT.'/index.php');
+		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{
 		$url = intval($_POST['url']);

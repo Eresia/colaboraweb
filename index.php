@@ -18,7 +18,7 @@
 			$current_date = $_GET['date'];
 		}
 		else{
-			$current_date = 'asc';
+			$current_date = 'desc';
 		}
 		
 		if(isset($_GET['notation']) && in_array($_GET['notation'], array('none' , 'desc', 'asc'))){
@@ -88,7 +88,7 @@
 		
 		$result .= '<div class="result_url">';
 		for($i = 0; $i < count($urls); $i++){
-			$result .= display_post($urls[$i], false);
+			$result .= display_post($urls[$i], false, true);
 		}
 		$result .= '</div>';
 		

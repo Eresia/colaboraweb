@@ -2,7 +2,6 @@
 	position: relative;
 	display: table;
 	width: 100%;
-	padding: 1em;
 	margin-bottom: 1em;
 }
 
@@ -52,10 +51,14 @@
 	font-size: large;
 }
 
-.create{
-	padding: 1em;
+.create_comment{
 }
 
 .img_note{
 	margin-bottom: 0;
+	display: inline-block;
+	letter-spacing: -0.31em;
+}
+
+.page{
 }

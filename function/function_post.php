@@ -69,7 +69,7 @@
 		return $result;
 	}
 	
-	function display_post($post, $notation=true){
+	function display_post($post, $notation=true, $index=false){
 		$name = get_pseudo($post['author']);
 		$notes = get_note_img($post['id']);
 		$nbNotes = get_nb_notes($post['id']);
@@ -107,6 +107,9 @@
 		$result .= '</div>';
 		$result .= '<div class="display_description">';
 		$result .= '<p>'.$post['description'].'</p>';
+		if($index){
+			$result .= '<p><a href="'.HTTP_ROOT.'/url/readPost.php?id='.$post['id'].'">Voir plus</a></p>';
+		}
 		$result .= '<hr />';
 		$result .= '<p>'.$info['sign'].'</p>';
 		$result .= '</div>';

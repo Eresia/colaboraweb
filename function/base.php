@@ -125,7 +125,6 @@
 		$doctype = false;
 		$close = false;
 		$textarea = false;
-		$img = false;
 		for($i = 0; $i < strlen($code); $i++){
 			if(substr($code, $i+1, 2) == '</'){
 				$indent--;
@@ -137,15 +136,12 @@
 				else{
 					if($code[$i+1] == '/'){
 						$close = true;
-						if(substr($code, $i+2, 8) == 'textarea'){
+						if($textarea){
 							$textarea = false;
 						}
 					}
 					else if(substr($code, $i+1, 8) == 'textarea'){
 						$textarea = true;
-					}
-					else if(substr($code, $i+1, 3) == 'img'){
-						$img = true;
 					}
 					
 				}
@@ -167,33 +163,28 @@
 					}
 				}
 				else if($code[$i-1] != '/'){
-					$result .= ">\n";
-					$indent++;
-					for($j = 0; $j < $indent; $j++){
-						$result .= '	';
-					}
-				}
-				else{
-					if($img && (substr($code, $i+2, 3) == 'img')){
+					if($textarea){
 						$result .= ">";
-						$img = false;
-					}
-					else if($textarea){
-						$result .= ">\n";
-						$textarea = false;
 					}
 					else{
-						$img = false;
 						$result .= ">\n";
+						$indent++;
 						for($j = 0; $j < $indent; $j++){
 							$result .= '	';
 						}
 					}
 				}
+				else{
+					
+					$result .= ">\n";
+					for($j = 0; $j < $indent; $j++){
+						$result .= '	';
+					}
+				}
 			}
 			else{
 				$result .= $code[$i];
-				if($code[$i+1] == "<"){
+				if($code[$i+1] == "<" && (substr($code, $i+2, 9) != '/textarea')){
 					$result .= "\n";
 					for($j = 0; $j < ($indent); $j++){
 						$result .= '	';
