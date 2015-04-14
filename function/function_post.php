@@ -1,7 +1,4 @@
-<?php
-	define('NOTE_HEIGHT', 40);
-	define('NOTE_WIDTH', NOTE_HEIGHT/2);
-	
+<?php	
 	require_once(SERV_ROOT.'/define/mysql_define.php');
 
 	function getPost($post){
@@ -82,7 +79,7 @@
 		}
 		$result =  '<div class="post">';
 		$result .= '<div class="info_author">';
-		$result .= '<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />';
+		$result .= '<img class="img_avatar" src="'.$avatar.'" alt="Avatar de '.$name.'" />';
 		$result .= '<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>';
 		$result .= '<p>Inscription : '.$info['date_inscription'].'</p>';
 		$result .= '</div>';
@@ -93,14 +90,24 @@
 		$result .= '<div class="subcontent_post">';
 		$result .= '<div class="display_url">';
 		$result .= '<p><a href="'.$post['url'].'">'.$post['url'].'</a></p>';
-		$result .= '<p class="img_note">';
+		$result .= '<p class="para_note">';
 		for($i = 1; $i <= 10; $i++){
 			if($notation){
-				$result .= '<a href="'.HTTP_ROOT.'/url/confirm_notation.php?id=&note='.$i.'"><img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/></a>';
+				$result .= '<a href="'.HTTP_ROOT.'/url/confirm_notation.php?id='.$post['id'].'&amp;note='.$i.'"><img id="note_'.$i.'" onmouseover="star_animation('.$i.')" onmouseout="star_to_default()" src="'.HTTP_ROOT.'/images/star_trans.png" alt="Note '.$i.'" title="Note de l\'url" /></a>';
 			}
 			else{
-				$result .= '<img src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" width="'.NOTE_WIDTH.'" height="'.NOTE_HEIGHT.'"/>';
+				$result .= '<img class="img_note" src="'.HTTP_ROOT.'/images/star_'.$notes[$i].'.png" alt="Note '.$i.'" title="Note de l\'url" />';
 			}
+		}
+		if($notation){
+			$result .= '<script type="text/javascript"><!--';
+			$result .= 'var notes = {};';
+			$result .= 'var id;';
+			for($i = 1; $i <= 10; $i++){
+				$result .= "notes.note_".$i." = 'img_note_".$notes[$i]."';";
+			}
+			$result .= "star_to_default();";
+			$result .= '--></script>';
 		}
 		$result .= '</p>';
 		$result .= '<p class="nb_notes">Note : '.($notes[0] / 2).'/5, Nombre de participation : '.$nbNotes.'</p>';
@@ -132,7 +139,7 @@
 			}
 			$result .=  '<div class="post">';
 			$result .= '<div class="info_author">';
-			$result .= '<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar de '.$name.'" />';
+			$result .= '<img class="img_avatar" src="'.$avatar.'" alt="Avatar de '.$name.'" />';
 			$result .= '<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>';
 			$result .= '<p>Inscription : '.$info['date_inscription'].'</p>';
 			$result .= '</div>';
@@ -358,5 +365,29 @@
 			}
 		}
 		return $result;
+	}
+	
+	function add_notation($author, $url, $note){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$alreadyNote = $mysql->prepare('SELECT COUNT(id) FROM note WHERE url = ? AND author = ?');
+		$alreadyNote->bind_param('ii', $url, $author);
+		$alreadyNote->execute();
+		$alreadyNote->bind_result($nb);
+		$alreadyNote->fetch();
+		$alreadyNote->close();
+		if($nb > 0){
+			$createNote = $mysql->prepare('UPDATE note SET note = ? WHERE url = ? AND author = ?');
+			$createNote->bind_param('iii', $note, $url, $author);
+			$createNote->execute();
+			$createNote->close();
+		}
+		else{
+			$createNote = $mysql->prepare('INSERT INTO note(url, note, author) VALUES(?, ?, ?)');
+			$createNote->bind_param('iii', $url, $note, $author);
+			$createNote->execute();
+			$createNote->close();
+		}
+		$mysql->close();
 	}
 ?>

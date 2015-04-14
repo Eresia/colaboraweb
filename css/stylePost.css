@@ -22,19 +22,20 @@
 	display: table-cell;
 	width: 100%;
 	vertical-align: top;
+	border: 1px solid black;
 }
 
 .info_post{
 	position: relative;
 	font-size: x-small;
 	padding: 1em;
-	border: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
 .subcontent_post{
 	position: relative;
 	padding: 1em;
-	border: 1px solid black;
+	border-top: 1px solid black;
 }
 
 .display_url {
@@ -54,10 +55,45 @@
 .create_comment{
 }
 
-.img_note{
+.para_note{
 	margin-bottom: 0;
 	display: inline-block;
 	letter-spacing: -0.31em;
+}
+
+.img_avatar{
+	width: 80px;
+	height: 80px;
+}
+
+.img_note, .img_note_left_full, .img_note_left_empty, .img_note_right_full, .img_note_right_empty{
+	width: 20px;
+	height: 40px;
+}
+
+.img_note_left_full{
+	background: url('../images/star_left_full.png') 0 0;
+	background-size: 20px 40px;
+}
+
+.img_note_left_empty{
+	background: url('../images/star_left_empty.png') 0 0;
+	background-size: 20px 40px;
+}
+
+.img_note_right_full{
+	background: url('../images/star_right_full.png') 0 0;
+	background-size: 20px 40px;
+}
+
+.img_note_right_empty{
+	background: url('../images/star_right_empty.png') 0 0;
+	background-size: 20px 40px;
+}
+
+.note_1:hover{
+	background: url('../images/star_left_full.png') 0 0;
+	background-size: 20px 40px;
 }
 
 .page{

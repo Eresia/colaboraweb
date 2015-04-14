@@ -15,25 +15,25 @@
 		if($id != null){
 			$info = get_info($id, array('avatar', 'date_inscription', 'description', 'sign'));
 			
-			$result .= '		<div class="profil_name">';
-			$result .= '			<p>'.$_GET['name'].'</p>';
-			$result .= '		</div>';
+			$result .= '<div class="profil_name">';
+			$result .= '<p>'.$_GET['name'].'</p>';
+			$result .= '</div>';
 			
-			$result .= '		<div class="profil_date">';
-			$result .= '			<p>Date d\'inscription : '.$info['date_inscription'].'</p>';
-			$result .= '		</div>';
+			$result .= '<div class="profil_date">';
+			$result .= '<p>Date d\'inscription : '.$info['date_inscription'].'</p>';
+			$result .= '</div>';
 			
-			$result .= '		<div class="profil_content">';
+			$result .= '<div class="profil_content">';
 			if(strlen($info['avatar']) != 0){
 				$avatar = $info['avatar'];
 			}
 			else{
 				$avatar = AVATAR_DEFAULT;
 			}
-			$result .= '			<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="" title="Avatar de '.$_GET['name'].'" />';
-			$result .= '			<p>Description : '.$info['description'].'</p>';
-			$result .= '			<p>Signature : '.$info['sign'].'</p>';
-			$result .= '		</div>';
+			$result .= '<img class="img_avatar" src="'.$avatar.'" alt="" title="Avatar de '.$_GET['name'].'" />';
+			$result .= '<p>Description : '.$info['description'].'</p>';
+			$result .= '<p>Signature : '.$info['sign'].'</p>';
+			$result .= '</div>';
 		}
 		else{
 			$result .= "<p>Profil inconnu</p>";

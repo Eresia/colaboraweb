@@ -1,8 +1,5 @@
 <?php
 	define("LOGIN_FILE", SERV_ROOT.'/login/login.csv');
-	
-	define('AVATAR_WIDTH', 80);
-	define('AVATAR_HEIGHT', 80);
 	define('AVATAR_DEFAULT', HTTP_ROOT.'/images/avatar_default.gif');
 	
 	define('DESCRIPTION_MAX', 255);

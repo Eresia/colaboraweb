@@ -37,7 +37,7 @@
 			$avatar = AVATAR_DEFAULT;
 		}
 		$result .= '<form method="post" action="confirm_profil.php" class="profil_form">';
-		$result .= '<img src="'.$avatar.'" width="'.AVATAR_WIDTH.'" height="'.AVATAR_HEIGHT.'" alt="Avatar" title="Avatar de '.$_SESSION['pseudo'].'" />';
+		$result .= '<img class="img_avatar" src="'.$avatar.'" alt="Avatar" title="Avatar de '.$_SESSION['pseudo'].'" />';
 		$result .= '<div><p>Lien de l\'avatar : </p> <input type="text" name="avatar" value="'.$info['avatar'].'" /></div>';
 		$result .= '<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.str_replace('<br />', "\n", $info['description']).'</textarea></div>';
 		$result .= '<div><p>Signature : </p> <textarea rows="10" cols="100" name="sign">'.str_replace('<br />', "\n", $info['sign']).'</textarea></div>';
@@ -54,7 +54,8 @@
 	}
 	
 	if(!isset($_SESSION['pseudo'])){
-		header('Location: '.HTTP_ROOT.'/login/login.php?return=http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+		$_SESSION['return'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		header('Location: '.HTTP_ROOT.'/login/login.php');
 	}
 	else{
 		echo indent(edit_profil_page());

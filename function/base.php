@@ -9,6 +9,7 @@
                 for($i = 0; $i < count($css); $i++){
                     $beginText .= '<link rel="stylesheet" href="'.$css[$i].'" />';
                 }
+                $beginText .= '<script src="'.HTTP_ROOT.'/js/notation.js" type="text/javascript"></script>';
 				$beginText .= '<link href="http://fonts.googleapis.com/css?family=Lobster|Orbitron:900|Oleo+Script+Swash+Caps:700|Denk+One|Open+Sans:600" rel="stylesheet" type="text/css" />';
                 
                 $beginText .=  '<title>'.$titleHead.'</title>';
@@ -124,71 +125,136 @@
 		$indent = 0;
 		$doctype = false;
 		$close = false;
+		$javascript = false;
 		$textarea = false;
 		for($i = 0; $i < strlen($code); $i++){
-			if(substr($code, $i+1, 2) == '</'){
-				$indent--;
-			}
-			if($code[$i] == '<'){
-				if($code[$i+1] == '!'){
-					$doctype = true;
+			if(!$javascript){
+				if(substr($code, $i+1, 2) == '</'){
+					$indent--;
 				}
-				else{
-					if($code[$i+1] == '/'){
-						$close = true;
-						if($textarea){
-							$textarea = false;
-						}
-					}
-					else if(substr($code, $i+1, 8) == 'textarea'){
-						$textarea = true;
-					}
-					
-				}
-				$result .= '<';
-			}
-			else if($code[$i] == '>'){
-				if($doctype){
-					$doctype = false;
-					$result .= ">\n";
-					for($j = 0; $j < $indent; $j++){
-						$result .= '	';
-					}
-				}
-				else if($close){
-					$close = false;
-					$result .= ">\n";
-					for($j = 0; $j < $indent; $j++){
-						$result .= '	';
-					}
-				}
-				else if($code[$i-1] != '/'){
-					if($textarea){
-						$result .= ">";
+				if($code[$i] == '<'){
+					if($code[$i+1] == '!'){
+						$doctype = true;
 					}
 					else{
+						if($code[$i+1] == '/'){
+							$close = true;
+							if($textarea){
+								$textarea = false;
+							}
+						}
+						else if(substr($code, $i+1, 8) == 'textarea'){
+							$textarea = true;
+						}
+						else if((substr($code, $i+1, 6) == 'script') && !(substr($code, $i+8, 3) == 'src')){
+							$javascript = true;
+						}
+						
+					}
+					$result .= '<';
+				}
+				else if($code[$i] == '>'){
+					if($doctype){
+						$doctype = false;
 						$result .= ">\n";
-						$indent++;
+						for($j = 0; $j < $indent; $j++){
+							$result .= '	';
+						}
+					}
+					else if($close){
+						$close = false;
+						$result .= ">\n";
+						for($j = 0; $j < $indent; $j++){
+							$result .= '	';
+						}
+					}
+					else if($code[$i-1] != '/'){
+						if($textarea){
+							$result .= ">";
+						}
+						else{
+							$result .= ">\n";
+							$indent++;
+							for($j = 0; $j < $indent; $j++){
+								$result .= '	';
+							}
+						}
+					}
+					else{
+						
+						$result .= ">\n";
 						for($j = 0; $j < $indent; $j++){
 							$result .= '	';
 						}
 					}
 				}
 				else{
-					
-					$result .= ">\n";
-					for($j = 0; $j < $indent; $j++){
-						$result .= '	';
+					$result .= $code[$i];
+					if($code[$i+1] == "<" && (substr($code, $i+2, 9) != '/textarea')){
+						$result .= "\n";
+						for($j = 0; $j < ($indent); $j++){
+							$result .= '	';
+						}
 					}
 				}
 			}
 			else{
-				$result .= $code[$i];
-				if($code[$i+1] == "<" && (substr($code, $i+2, 9) != '/textarea')){
+				if(($code[$i] == "<") && (substr($code, $i+1, 3) == '!--')){
 					$result .= "\n";
 					for($j = 0; $j < ($indent); $j++){
 						$result .= '	';
 					}
+					$result .= '<!--';
+					$i+=3;
+					$result .= "\n";
+					$indent++;
+					for($j = 0; $j < ($indent); $j++){
+						$result .= '	';
+					}
+				}
+				else if($code[$i] == "{"){
+					if(!($code[$i+1] == "}")){
+						$result .= $code[$i];
+						$result .= "\n";
+						$indent++;
+						for($j = 0; $j < ($indent); $j++){
+							$result .= '	';
+						}
+					}
+					else{
+						$result .= "{}";
+						$i++;
+					}
+				}
+				else if(($code[$i] == ";") || ($code[$i] == "}")){
+					$result .= $code[$i];
+					if($code[$i+1] == "}"){
+						$indent--;
+					}
+					if($code[$i+1] != ";"){
+						if(substr($code, $i+1, 3) == '-->'){
+							$javascript = false;					
+							$indent--;
+							$result .= "\n";
+							for($j = 0; $j < ($indent); $j++){
+								$result .= '	';
+							}
+							$result .= '-->'."\n";
+							for($j = 0; $j < ($indent); $j++){
+								$result .= '	';
+							}
+							$i += 3;
+						}
+						else{
+							$result .= "\n";
+							for($j = 0; $j < ($indent); $j++){
+								$result .= '	';
+							}
+						}
+					}
+				}
+				else{
+					$result .= $code[$i];
 				}
 			}
 		}
