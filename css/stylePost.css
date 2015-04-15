@@ -1,3 +1,8 @@
+/*
+CSS spécifique à createPost.php et readPost.php
+formulaire de création d'un post (lien+note)
+*/
+
 .post{
 	position: relative;
 	display: table;

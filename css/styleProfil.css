@@ -1,3 +1,8 @@
+/*
+CSS spécifique à consulte_profil.php et edit_profil.php
+affichage des profils utilisateurs du site.
+*/
+
 .profil_message_validate, .profil_message_error{
 	position: relative;
 	text-align: center;
