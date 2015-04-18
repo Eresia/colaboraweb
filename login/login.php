@@ -29,7 +29,7 @@
 				$pass = "";
 			}
 			
-			$result .= "<label for=\"pseudo\" class=\"ps\">Pseudo : </label><input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" class=\"ps\" /><br/>";
+			$result .= "<div><label for=\"pseudo\" class=\"ps\">Pseudo : </label><input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" class=\"ps\" /><br/>";
 			$result .= "<label for=\"mdp\" class= \"mdp\">Mot de passe : </label><input type=\"password\" name=\"pass\" value=\"".$pass."\" class=\"mdp\"/>";
 			if(isset($_SESSION['return'])){
 				$result .= '<input type="hidden" name="return" value="'.$_SESSION['return'].'" />';

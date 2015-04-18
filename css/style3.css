@@ -62,6 +62,11 @@ li.icooth a{
   margin-left: 10%;
 }
 
+.header a{
+  text-decoration: none;
+  color : black;
+}
+
 .titre{
   font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
   font-size: 3vw;
@@ -120,7 +125,17 @@ span.gras{
   width: 150px;
   text-align: center;
   margin-right: 5%;
+}
 
+.r_menu a{
+  text-decoration: none;
+  font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+  font-weight: bold;
+  color : #DB840F;
+}
+
+.r_menu a:hover{
+  color : #1958FF;
 }
 
 .core{

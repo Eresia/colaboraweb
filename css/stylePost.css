@@ -16,10 +16,23 @@ formulaire de création d'un post (lien+note)
 	font-size: x-small;
 	padding: 1em;
 	border: 1px solid black;
+
 }
 
 .message_name{
 	font-size: medium;
+}
+
+.message_name a{
+	text-decoration: none;
+	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+	font-weight: bold;
+	font-size: large;
+	color : #1958FF;
+}
+
+.message_name a:hover{
+	color : #DB840F;
 }
 
 .content_post{
@@ -47,14 +60,34 @@ formulaire de création d'un post (lien+note)
 	text-align: center;
 }
 
+.display_url a{
+	text-decoration: none;
+	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+	font-weight: bold;
+	font-size: large;
+	color : #1958FF;
+
+}
+
+.display_url a:hover{
+	color : #DB840F;
+}
+
+.display_description a{
+	text-decoration: none;
+	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+	font-weight: bold;
+	font-size: large;
+	color : #1958FF;
+}
+
+.display_description a:hover{
+	color : #DB840F;
+}
+
 .nb_notes {
 	margin-top: 0;
 	font-size: small;
-}
-
-.display_url a{
-	font-weight: bold;
-	font-size: large;
 }
 
 .create_comment{
