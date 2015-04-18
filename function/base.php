@@ -20,7 +20,7 @@
     
     function headerPage(){
         $menu = '<div class="header">';
-		$menu .= '<p class="titre">Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></p>';
+		$menu .= '<p class="titre"><a href="http://localhost/colaboraweb/index.php" >Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></a></p>';
         $menu .= '<div class="c_menu">';
         $menu .= '<a href="'.HTTP_ROOT.'/index.php"><img src="'.HTTP_ROOT.'/images/home147.svg" width="2.5%" height="2.5%" alt="Accueil"/>Home</a>';
         if(!isset($_SESSION['pseudo'])){
@@ -66,7 +66,7 @@
 			}
 		}
 		else{
-			$menu .= '<p>Bienvenue Visiteur, vous pouvez vous <a href="'.HTTP_ROOT.'/login/subscribe.php">INSCRIRE</a> ou vous <a href="'.HTTP_ROOT.'/login/login.php">CONNECTER</a> si vous désirez poster des liens et des commentaires.</p>';
+			$menu .= '<p>Bienvenue Visiteur, vous pouvez vous <a href="'.HTTP_ROOT.'/login/subscribe.php">INSCRIRE</a> ou vous <a href="'.HTTP_ROOT.'/login/login.php">CONNECTER</a> si vous d&eacutesirez poster des liens et des commentaires.</p>';
 		}
 		$menu .= '</div>';
         return $menu;
@@ -100,10 +100,10 @@
 		$choos = rand(0,1);
 
 		if($choos==0){
-			$footer .=  "<p>Thomas LEFEBVRE &amp; Bastien LEPESANT  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>";
+			$footer .=  "<p>Thomas LEFEBVRE &amp; Bastien LEPESANT  2015 Copyright : Tous droits r&eacuteserv&eacutes parce que c'est plus facile.</p>";
         }
         elseif($choos==1){
-            $footer .=  "<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits réservés parce que c'est plus facile.</p>";
+            $footer .=  "<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits r&eacuteserv&eacutes parce que c'est plus facile.</p>";
         }		
 	
 		$footer .=  '</div>';
