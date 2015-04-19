@@ -15,7 +15,9 @@ formulaire de création d'un post (lien+note)
 	position: relative;
 	font-size: x-small;
 	padding: 1em;
-	border: 1px solid black;
+	border-left: 1px solid black;
+	border-top : 1px solid black;
+	border-bottom : 1px solid black;
 
 }
 
@@ -47,13 +49,22 @@ formulaire de création d'un post (lien+note)
 	position: relative;
 	font-size: x-small;
 	padding: 1em;
-	border-bottom: 1px solid black;
+	/*border-bottom: 1px solid black;*/
 }
 
 .subcontent_post{
 	position: relative;
 	padding: 1em;
 	border-top: 1px solid black;
+	-webkit-transition: all 2s;
+  	-moz-transition: all 2s;
+  	-o-transition: all 2s;
+  	transition : all 2s;
+}
+
+.subcontent_post:hover{
+	background-color:#000000;
+	color : #FFFFFF;
 }
 
 .display_url {

@@ -16,6 +16,19 @@ p{
   font-family:  "Open Sans", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
 
+a{
+  text-decoration: none;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  transition : all 0.6s;
+}
+
+a:hover{
+
+
+}
+
 ul{
 
 }
@@ -62,15 +75,23 @@ li.icooth a{
   margin-left: 10%;
 }
 
-.header a{
-  text-decoration: none;
-  color : black;
-}
 
 .titre{
   font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
   font-size: 3vw;
 }
+
+.titre a{
+  text-decoration: none;
+  color : black;
+}
+
+.titre a:hover{
+  color : #DB840F;
+  /*text-decoration: underline;*/
+  font-size: 15px;
+}
+
 
 span.gras{
    font-weight: bold;
@@ -96,6 +117,7 @@ span.gras{
 
 .c_menu a:hover{
   color : #1958FF;
+  text-decoration: underline;
 }
 
 .h_menu{
@@ -116,7 +138,8 @@ span.gras{
 }
 
 .h_menu a:hover{
-  color : #1958FF;
+  color : #1958FF;/*@Deprecated : Already defined in the database for each category*/
+  text-decoration: underline;
 }
 
 .r_menu{
