@@ -18,7 +18,14 @@ formulaire de création d'un post (lien+note)
 	border-left: 1px solid black;
 	border-top : 1px solid black;
 	border-bottom : 1px solid black;
+}
 
+.info_author p{
+	text-align: center;
+}
+
+.sub_date{
+	font-size: 1.2em;
 }
 
 .message_name{
@@ -56,10 +63,10 @@ formulaire de création d'un post (lien+note)
 	position: relative;
 	padding: 1em;
 	border-top: 1px solid black;
-	-webkit-transition: all 2s;
-  	-moz-transition: all 2s;
-  	-o-transition: all 2s;
-  	transition : all 2s;
+	-webkit-transition: all 1s;
+  	-moz-transition: all 1s;
+  	-o-transition: all 1s;
+  	transition : all 1s;
 }
 
 .subcontent_post:hover{

@@ -26,7 +26,6 @@ a{
 
 a:hover{
 
-
 }
 
 ul{
@@ -42,7 +41,7 @@ li a{
 .sub-content{
 }
 
-li.icohtml a{
+/*li.icohtml a{
   color: #FF7600;
 }
 
@@ -60,7 +59,7 @@ li.icosql a{
 
 li.icooth a{
   color: #C9C9C9;
-}
+}*/
 
 .wrap{
   min-height: 100%;
@@ -87,9 +86,9 @@ li.icooth a{
 }
 
 .titre a:hover{
-  color : #DB840F;
+  color : #1472CC;
   /*text-decoration: underline;*/
-  font-size: 15px;
+  font-size: 0.3em;
 }
 
 
