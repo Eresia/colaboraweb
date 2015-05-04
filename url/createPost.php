@@ -9,7 +9,7 @@
 		
 		$result .= begin_content();
 		
-		if(is_category(intval($_GET['category']))){
+		if(isset($_GET['category']) && is_category(intval($_GET['category']))){
 			$category = intval($_GET['category']);
 		}
 		else{
@@ -67,9 +67,6 @@
 	
 	if(!isset($_SESSION['id'])){
 		header('Location: '.HTTP_ROOT.'/login/login.php?return=http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-	}
-	else if (!isset($_GET['category'])){
-		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{
 		echo indent(create_post_page());

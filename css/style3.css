@@ -142,6 +142,21 @@ span.gras{
   text-decoration: underline;
 }
 
+.l_menu{
+  position: relative;
+  float: left;
+  width: 150px;
+  text-align: center;
+  margin-right: 5%;
+}
+
+.l_menu a{
+  text-decoration: none;
+  font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+  font-weight: bold;
+  color : #DB840F;
+}
+
 .r_menu{
   position: relative;
   float: right;

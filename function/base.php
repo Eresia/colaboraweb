@@ -20,7 +20,7 @@
     
     function headerPage(){
         $menu = '<div class="header">';
-		$menu .= '<p class="titre"><a href="'.HTTP_ROOT.'" >Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></a></p>';
+		$menu .= '<p class="titre"><a href="http://localhost/colaboraweb/" >Col<span class="gras">LAB</span>ora<span class="gras">WEB</span></a></p>';
         $menu .= '<div class="c_menu">';
         $menu .= '<a href="'.HTTP_ROOT.'/index.php"><img src="'.HTTP_ROOT.'/images/home147.svg" width="2.5%" height="2.5%" alt="Accueil"/>Home</a>';
         if(!isset($_SESSION['pseudo'])){
@@ -55,6 +55,13 @@
 		$mysql->close();
         return $menu;
     }
+	
+	function leftMenu(){
+        $menu = '<div class="l_menu">';
+		$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
+		$menu .= '</div>';
+        return $menu;
+    }
     
     function rightMenu(){
         $menu = '<div class="r_menu">';
@@ -78,6 +85,7 @@
 		$result .= '<div class="core">';
 
 		$result .= topMenu();
+		$result .= leftMenu();
         $result .= rightMenu();
 
 		$result .= '<div class="content">';
