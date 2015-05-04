@@ -56,10 +56,10 @@ formulaire de création d'un post (lien+note)
 	position: relative;
 	padding: 1em;
 	border-top: 1px solid black;
-	-webkit-transition: all 2s;
-  	-moz-transition: all 2s;
-  	-o-transition: all 2s;
-  	transition : all 2s;
+	-webkit-transition: all 1s;
+  	-moz-transition: all 1s;
+  	-o-transition: all 1s;
+  	transition : all 1s;
 }
 
 .subcontent_post:hover{
@@ -107,7 +107,7 @@ formulaire de création d'un post (lien+note)
 .para_note{
 	margin-bottom: 0;
 	display: inline-block;
-	letter-spacing: -0.31em;
+	letter-spacing: -0.39em;
 }
 
 .img_avatar{
