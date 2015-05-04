@@ -81,7 +81,7 @@
 		$result .= '<div class="info_author">';
 		$result .= '<img class="img_avatar" src="'.$avatar.'" alt="Avatar de '.$name.'" />';
 		$result .= '<p class="message_name"><a href="'.HTTP_ROOT.'/profil/consulte_profil.php?name='.$name.'">'.$name.'</a></p>';
-		$result .= '<p>Inscription : '.$info['date_inscription'].'</p>';
+		$result .= '<p class="sub_date">Inscription : '.$info['date_inscription'].'</p>';
 		$result .= '</div>';
 		$result .= '<div class="content_post">';
 		$result .= '<div class="info_post">';
