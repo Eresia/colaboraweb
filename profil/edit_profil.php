@@ -26,9 +26,7 @@
 		
 		$result .= '<div class="profil_date">';
 		$result .= '<p>Date d\'inscription : '.$info['date_inscription'].'</p>';
-		//echo '<p class="consult_inslink">Consulter profil : <a href="./consulte_profil.php?name=Monsieur>Go</a></p>';
 		$result .= '</div>';
-		
 		$result .= '<div class="profil_content">';
 		if(strlen($info['avatar']) != 0){
 			$avatar = $info['avatar'];

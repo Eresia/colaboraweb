@@ -55,19 +55,27 @@
 		$mysql->close();
         return $menu;
     }
-	
+	/*
 	function leftMenu(){
         $menu = '<div class="l_menu">';
+        if(isset($_SESSION['id'])){
 		$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
+		}
+		else{
+
+		}
 		$menu .= '</div>';
         return $menu;
-    }
+    }*/
     
     function rightMenu(){
         $menu = '<div class="r_menu">';
 		if(isset($_SESSION['id'])){
 			$menu .= '<p>'.$_SESSION['pseudo'].'</p>';
 			$menu .= '<p><a href="'.HTTP_ROOT.'/profil/edit_profil.php">Profil</a></p>';
+			if($_SESSION['group'] == 2 OR $_SESSION['group'] == 3){
+			$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
+			}
 			if($_SESSION['group'] == 3){
 				$menu .= '<p><a href="'.HTTP_ROOT.'/administration/administration.php">Administration</a></p>';
 			}
@@ -85,11 +93,11 @@
 		$result .= '<div class="core">';
 
 		$result .= topMenu();
-		$result .= leftMenu();
         $result .= rightMenu();
 
+
 		$result .= '<div class="content">';
-			
+	
 		return $result;
 	}
 	

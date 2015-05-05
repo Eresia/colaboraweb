@@ -10,6 +10,11 @@ formulaire de création d'un post (lien+note)
 	margin-bottom: 1em;
 }
 
+.post_form{
+	background-color: #43789E;
+	text-align: center;
+}
+
 .info_author{
 	display: table-cell;
 	position: relative;
