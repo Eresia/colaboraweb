@@ -1,4 +1,8 @@
 <?php
+
+	/*Fichier d'affichage des posts et des commentaires associés.
+	Contient également le formulaire d'envoi de commmentaires */
+
 	session_start();
 	require_once("../define/root_define.php");
 	require_once(SERV_ROOT."/define/admin_define.php");
