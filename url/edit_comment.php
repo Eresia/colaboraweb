@@ -31,7 +31,7 @@
 			$_SESSION['msg'] = "";
 		}
 		
-		$result .= '<form method="post" action="confirm_edit_comment.php" class="post_form">';
+		$result .= '<form method="post" action="confirm_edit_comment.php" class="post_form_edit">';
 		$result .= '<div><p>Commentaire : </p> <textarea rows="5" cols="100" name="comment">'.$comment.'</textarea></div>';
 		$result .= '<div><input type="hidden" name="id" value="'.$_POST['id'].'" /></div>';
 		$result .= '<div><input type="hidden" name="url" value="'.$info['url'].'" /></div>';

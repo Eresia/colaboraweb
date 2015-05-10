@@ -12,11 +12,13 @@
 			$categories .= '<option value="'.$list_categories[$id]['id'].'">'.$list_categories[$id]['name'].'</option>';
 			$id = $list_categories[$id]['id'];
 		}
-		$result = '<table>';
+		$result = '<p class="cat">SUPPRIMER UNE CATEGORIE</p>';
+		$result .= '<table>';
 		$result .= $display_categories;
 		$result .= '</table>';
+		$result .= '<p class="cat">CREER UNE CATEGORIE</p>';
 		$result .= '<form method="post" action="create_category.php" class="post_form">';
-		$result .= '<div>Nom : <input type="text" name="name"/> Couleur (Hexadecimal) : <input type="text" name="color"/> Catégorie précédente : <select name="previous">'.$categories.'</select> <input  class="submit_cat" type="submit" value="Ajouter une catégorie"/></div>';
+		$result .= '<div>Nom : <input  class="cat_s" type="text" name="name"/> Couleur (Hexadecimal) : <input class="cat_s" type="text" name="color"/> Catégorie précédente : <select name="previous">'.$categories.'</select> <input  class="submit_cat" type="submit" value="Ajouter une catégorie"/></div>';
 		$result .= '</form>';
 		return $result;
 	}

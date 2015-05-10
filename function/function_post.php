@@ -107,13 +107,13 @@
 		$result .= '<div class="info_post">';
 		if(isset($_SESSION['id']) && (($_SESSION['id'] == $post['author']) || ($_SESSION['group'] == ADMIN))){
 			$result .= '<div class="info_post_edit">';
-			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/delete_post.php" class="post_form">';
+			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/delete_post.php" class="post_form_del">';
 			$result .= '<input type="hidden" name="id" value="'.$post['id'].'" />';
 			$result .= '<input type="submit" value="Supprimer" />';
 			$result .= '</form>';
 			$result .= '</div>';
 			$result .= '<div class="info_post_edit">';
-			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/edit_post.php" class="post_form">';
+			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/edit_post.php" class="post_form_edit">';
 			$result .= '<input type="hidden" name="id" value="'.$post['id'].'" />';
 			$result .= '<input type="submit" value="Editer" />';
 			$result .= '</form>';

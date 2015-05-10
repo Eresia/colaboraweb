@@ -29,8 +29,12 @@ td.name_category{
 }
 
 div{
-	text-align: center;
 	font-weight: bold;
+
+}
+
+div#admin_list.admin{
+	margin-left: 10%;
 }
 
 div#admin_category.admin{
@@ -43,8 +47,7 @@ div#admin_category.admin{
 }
 
 div#admin_category.admin input{
-	display : block;
-	margin: auto;
+
 }
 
 div#admin_category.admin select{
@@ -52,8 +55,8 @@ div#admin_category.admin select{
 	margin : auto;
 }
 
-.submit_cat{
-	margin-top: 5%;
+input.submit_cat{
+	margin-top: 2%;
 }
 
 div#admin_users.admin{
@@ -86,9 +89,22 @@ td.delete_user a:hover{
 
 table{
 	text-align: center;
-	display : inline-block;
 	margin : auto;
 }
 
+.cat{
+	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+	font-size: 1.08em;
+	text-align: center;
+}
+
+.cat_s{
+	display: block;
+	margin: auto;
+}
+
+.post_form div{
+	text-align: center;
+}
 
 
