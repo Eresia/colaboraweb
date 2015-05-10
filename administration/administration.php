@@ -1,4 +1,7 @@
 <?php
+
+	/*Affichage de la partie administration (les fonctions get_admin_categories() et get_admin_users() sont appelés pour récupérer les formulaires d'édition de catégories et d'utilisateurs).*/
+
 	session_start();
 	require_once("../define/root_define.php");
     require_once(SERV_ROOT."/function/base.php");
