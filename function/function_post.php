@@ -333,7 +333,7 @@
 	function create_post($category, $author, $url, $description){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$post = $mysql->prepare('INSERT INTO url(category, author, url, description, date)  VALUES(?, ?, ?, ?, CURRENT_DATE())');
+		$post = $mysql->prepare('INSERT INTO url(category, author, url, description, date)  VALUES(?, ?, ?, ?, NOW())');
 		$post->bind_param('iiss', $category, $author, $url, $description);
 		$post->execute();
 		$post->close();
@@ -396,7 +396,7 @@
 	function create_comment($author, $url, $comment){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$post = $mysql->prepare('INSERT INTO comment(author, url, comment, date)  VALUES(?, ?, ?, CURRENT_DATE())');
+		$post = $mysql->prepare('INSERT INTO comment(author, url, comment, date)  VALUES(?, ?, ?, NOW())');
 		$post->bind_param('iss', $author, $url, $comment);
 		$post->execute();
 		$post->close();
