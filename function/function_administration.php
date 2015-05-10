@@ -12,11 +12,11 @@
 			$categories .= '<option value="'.$list_categories[$id]['id'].'">'.$list_categories[$id]['name'].'</option>';
 			$id = $list_categories[$id]['id'];
 		}
-		$result = '<p class="cat">SUPPRIMER UNE CATEGORIE</p>';
+		$result = '<p class="p_admin">SUPPRIMER UNE CATEGORIE</p>';
 		$result .= '<table>';
 		$result .= $display_categories;
 		$result .= '</table>';
-		$result .= '<p class="cat">CREER UNE CATEGORIE</p>';
+		$result .= '<p class="p_admin">CREER UNE CATEGORIE</p>';
 		$result .= '<form method="post" action="create_category.php" class="post_form">';
 		$result .= '<div>Nom : <input  class="cat_s" type="text" name="name"/> Couleur (Hexadecimal) : <input class="cat_s" type="text" name="color"/> Catégorie précédente : <select name="previous">'.$categories.'</select> <input  class="submit_cat" type="submit" value="Ajouter une catégorie"/></div>';
 		$result .= '</form>';
@@ -24,8 +24,9 @@
 	}
 	
 	function get_admin_users(){
+		$result = '<p class="p_admin">MODIFIER LES DROITS D\'UN UTILISATEUR</p>';
 		$users = get_users();
-		$result = '<table>';
+		$result .= '<table>';
 		foreach($users as $info){
 			$option = '';
 			$selected = '';
@@ -60,6 +61,7 @@
 			$result .= '</tr>';
 		}
 		$result .= '</table>';
+		$result .= '<p class="p_admin">AJOUTER UN NOUVEL UTILISATEUR</p>';
 		$option = '<option value="'.USER.'" selected="selected">Utilisateur</option>';
 		$option .= '<option value="'.EVALU.'">Evaluateur</option>';
 		$option .= '<option value="'.ADMIN.'">Admin</option>';

@@ -88,11 +88,10 @@ td.delete_user a:hover{
 }
 
 table{
-	text-align: center;
 	margin : auto;
 }
 
-.cat{
+.p_admin{
 	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 	font-size: 1.08em;
 	text-align: center;
