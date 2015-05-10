@@ -64,7 +64,7 @@
 			$menu .= '<p><a href="'.HTTP_ROOT.'/profil/edit_profil.php">Profil</a></p>';
 
 			if($_SESSION['group'] >= EVALU){
-				$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
+				$menu .= '<p><a class="a_post" href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a></p>';
 
 			}
 			if($_SESSION['group'] == ADMIN){
