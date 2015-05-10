@@ -14,7 +14,7 @@
 		else{
 			$pass = $_POST['pass'];
 		}
-		update_user_rang($_POST['id'], $_POST['rang'], $pass);
+		update_user($_POST['id'], $_POST['rang'], $pass);
 		header('Location: '.HTTP_ROOT.'/administration/administration.php');
 	}
 ?>

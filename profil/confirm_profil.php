@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	require_once("../define/root_define.php");
-	require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_profil.php");
+	require_once(SERV_ROOT."/function/function_login.php");
 	
 	if(isset($_POST['avatar'])){
 		$tabAvatar = explode('.', $_POST['avatar']);
@@ -23,6 +23,22 @@
 		$validAvatar = false;
 		$msg = "L'avatar n'est pas défini";
 		header('Location: edit_profil.php?msg='.$msg.'&result=false');
+	}
+	
+	if(isset($_POST['pass']) && isset($_POST['confirmPass'])){
+		if($_POST['pass'] == $_POST['confirmPass']){
+			if(right_pass($_POST['pass'])){
+				update_user($_SESSION['id'], $_POST['pass']);
+			}
+			else{
+				$msg = "Le mot de passe n'est pas conforme";
+				header('Location: edit_profil.php?msg='.$msg.'&result=false');
+			}
+		}
+		else{
+			$msg = "Les mots de passes ne sont pas identiques";
+			header('Location: edit_profil.php?msg='.$msg.'&result=false');
+		}
 	}
 	
 	if(isset($_POST['description'])){
@@ -61,7 +77,7 @@
 	
 	if($validAvatar && $validDescription && $validSign){
 		set_info($_SESSION['id'], array('avatar' => $avatar, 'description' => $description, 'sign' => $sign));
-		$msg = "Mise à jour des info réussi";
-		header('Location: edit_profil.php?msg='.$msg.'&result=true');
+		//$msg = "Mise à jour des info réussi";
+		//header('Location: edit_profil.php?msg='.$msg.'&result=true');
 	}	
 ?>

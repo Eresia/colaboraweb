@@ -69,7 +69,7 @@
 		}
     }
 	
-	function update_user_rang($id, $rang, $pass){
+	function update_user($id, $pass,$rang=-1){
 		$file = file(LOGIN_FILE);
 		for($i = 0; $i < count($file); $i++){
 			$line = explode("\t", $file[$i]);
@@ -77,12 +77,14 @@
 				if($pass != ""){
 					$line[2] = password_hash($pass, PASSWORD_DEFAULT);
 				}
-				$line[3] = $rang;
+				if($rang != -1){
+					$line[3] = $rang.'\n';
+				}
 				$file[$i] = $line[0];
 				for($j = 1; $j < count($line); $j++){
+				echo "::".$line[$j]."::";
 					$file[$i] .= "\t".$line[$j];
 				}
-				$file[$i] .= "\n";
 				break;
 			}
 		}
