@@ -364,6 +364,14 @@
 		$post->bind_param('i', $id);
 		$post->execute();
 		$post->close();
+		$post = $mysql->prepare('DELETE FROM comment WHERE url=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM note WHERE url=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
 		$mysql->close();
 	}
 	
@@ -418,6 +426,24 @@
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
 		$post = $mysql->prepare('DELETE FROM comment WHERE id=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$mysql->close();
+	}
+	
+	function delete_user_data($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('DELETE FROM comment WHERE author=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM note WHERE author=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM url WHERE author=?');
 		$post->bind_param('i', $id);
 		$post->execute();
 		$post->close();
