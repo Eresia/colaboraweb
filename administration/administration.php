@@ -4,6 +4,7 @@
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_administration.php");
 	require_once(SERV_ROOT."/function/function_login.php");
+	require_once(SERV_ROOT."/function/function_post.php");
 	
 	function administration_page(){
 		$result = beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleAdministration.css"), 'Administration');

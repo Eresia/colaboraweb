@@ -3,7 +3,7 @@
 	
 	require_once(SERV_ROOT.'/define/mysql_define.php');
     
-    function subscribe($pseudo, $pass){
+    function subscribe($pseudo, $pass, $right=1){
         if(right_pseudo($pseudo) && right_pass($pass)){
 			$idMax = 0;
 			if(file_exists(LOGIN_FILE)){
@@ -24,7 +24,6 @@
 			else{
 				$file = fopen(LOGIN_FILE, "w");
 			}
-			$right = 1;
 			$passCrypt = password_hash($pass, PASSWORD_DEFAULT);
 			$currentId = $idMax + 1;
 			fputs($file, $currentId."\t".$pseudo."\t".$passCrypt."\t".$right."\n");
@@ -69,6 +68,26 @@
 			return false;
 		}
     }
+	
+	function update_user_rang($id, $rang, $pass){
+		$file = file(LOGIN_FILE);
+		for($i = 0; $i < count($file); $i++){
+			$line = explode("\t", $file[$i]);
+			if(intval($line[0] == $id)){
+				if($pass != ""){
+					$line[2] = password_hash($pass, PASSWORD_DEFAULT);
+				}
+				$line[3] = $rang;
+				$file[$i] = $line[0];
+				for($j = 1; $j < count($line); $j++){
+					$file[$i] .= "\t".$line[$j];
+				}
+				$file[$i] .= "\n";
+				break;
+			}
+		}
+		file_put_contents(LOGIN_FILE, $file);
+	}
 	
 	function delete_user($id){
 		$file = file(LOGIN_FILE);

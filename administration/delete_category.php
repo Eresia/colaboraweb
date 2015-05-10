@@ -8,7 +8,7 @@
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{
-		//delete_user($_GET['id']);
+		delete_category($_GET['id']);
 		header('Location: '.HTTP_ROOT.'/administration/administration.php');
 	}
 ?>

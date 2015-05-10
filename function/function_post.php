@@ -258,13 +258,22 @@
 	function get_categories(){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$prep = $mysql->query('SELECT id, name, previous FROM category');
+		$prep = $mysql->query('SELECT id, name,previous, color FROM category');
 		while($result_query = $prep->fetch_assoc()){
-			$result[$result_query['previous']] = array('name' => $result_query['name'], 'id' => $result_query['id']);
+			$result[$result_query['previous']] = array('name' => $result_query['name'], 'id' => $result_query['id'], 'color' => $result_query['color']);
 		}
 		$prep->close();
 		$mysql->close();
 		return $result;
+	}
+	
+	function get_last_categorie(){
+		$list_categories = get_categories();
+		$id = 0;
+		while(isset($list_categories[$id])){
+			$id = $list_categories[$id]['id'];
+		}
+		return $id;
 	}
 	
 	function create_post($category, $author, $url, $description){
@@ -305,6 +314,56 @@
 		$post->execute();
 		$post->close();
 		
+		$mysql->close();
+	}
+	
+	function create_category($name, $color, $askPrevious=-1){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$lastCategory = get_last_categorie();
+		if($askPrevious != 0){
+			$post = $mysql->prepare('SELECT id FROM category WHERE id=?');
+			$post->bind_param('i', $askPrevious);
+			$post->execute();
+			$post->bind_result($exist);
+			if($post->fetch()){
+				$previous = $exist;
+			}
+			else{
+				$previous = $lastCategory;
+			}
+			$post->close();
+		}
+		else{
+			$previous = 0;
+		}
+		$post = $mysql->prepare('INSERT INTO category(name, color, previous)  VALUES(?, ?, ?)');
+		$post->bind_param('sis', $name, $color, $previous);
+		$post->execute();
+		$post->close();
+		if($previous != $lastCategory){
+			$lastId = $mysql->insert_id;
+			$mysql->query('UPDATE category SET previous='.$lastId.' WHERE previous='.$previous.' AND NOT id='.$lastId);
+		}
+		
+		$mysql->close();
+	}
+	
+	function delete_category($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('SELECT previous FROM category WHERE id=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->bind_result($previous);
+		if($post->fetch()){
+			$post->close();
+			$mysql->query('UPDATE category SET previous='.$previous.' WHERE previous='.$id);
+		}
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM category WHERE id=?');
+		$post->bind_param('i', $id);
+		$post->execute();
 		$mysql->close();
 	}
 	

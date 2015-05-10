@@ -46,7 +46,7 @@
 		}
 		$id = 0;
 		while(isset($previous[$id])){
-			$menu .= '<li class="icohtml" id="'.$previous[$id]['name'].'"><a style="color:#'.dechex($previous[$id]['color']).'" href="'.HTTP_ROOT.'/index.php?category='.$previous[$id]['id'].'">'.$previous[$id]['name'].'</a></li>';
+			$menu .= '<li class="icohtml" id="'.$previous[$id]['name'].'"><a style="color:#'.str_pad(dechex($previous[$id]['color']), 6, "0", STR_PAD_LEFT).'" href="'.HTTP_ROOT.'/index.php?category='.$previous[$id]['id'].'">'.$previous[$id]['name'].'</a></li>';
 			$id = $previous[$id]['id'];
 		}
 		$menu .= '</ul>';

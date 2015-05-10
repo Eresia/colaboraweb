@@ -1,20 +1,23 @@
-<?php
+﻿<?php
 	require_once(SERV_ROOT.'/define/mysql_define.php');
-	require_once("../define/admin_define.php");
+	require_once(SERV_ROOT.'/define/admin_define.php');
 	
 	function get_admin_categories(){
-		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
-		$mysql->query("SET NAMES UTF8");
-		$cat = $mysql->prepare("SELECT id,name,color FROM category");
-		$cat->execute();
-		$cat->bind_result($id, $name, $color);
-		$result = '<table>';
-		while($cat->fetch()){
-			$result .= '<tr><td class="name_category" style="color:#'.dechex($color).'">'.$name.'</td><td class="delete_category"><a href="supprimer_category.php?id='.$id.'">Supprimer</a></td></tr>';
+		$categories = '<option value="0">Première catégorie</option>';
+		$id = 0;
+		$list_categories = get_categories();
+		$display_categories = '';
+		while(isset($list_categories[$id])){
+			$display_categories .= '<tr><td class="name_category" style="color:#'.dechex($list_categories[$id]['color']).'">'.$list_categories[$id]['name'].'</td><td class="delete_category"><a href="delete_category.php?id='.$list_categories[$id]['id'].'">Supprimer</a></td></tr>';
+			$categories .= '<option value="'.$list_categories[$id]['id'].'">'.$list_categories[$id]['name'].'</option>';
+			$id = $list_categories[$id]['id'];
 		}
+		$result = '<table>';
+		$result .= $display_categories;
 		$result .= '</table>';
-		$cat->close();
-		$mysql->close();
+		$result .= '<form method="post" action="create_category.php" class="post_form">';
+		$result .= '<div>Nom : <input type="text" name="name"/> Couleur (Hexadecimal) : <input type="text" name="color"/> Catégorie précédente : <select name="previous">'.$categories.'</select> <input type="submit" value="Ajouter une catégorie"/></div>';
+		$result .= '</form>';
 		return $result;
 	}
 	
@@ -37,15 +40,16 @@
 			if($info['rang'] == ADMIN){
 				$selected .= ' selected="selected"';
 			}
-			$option .= '<option value="'.USER.'"'.$selected.'>Admin</option>';
+			$option .= '<option value="'.ADMIN.'"'.$selected.'>Admin</option>';
 			$result .= '<tr>';
 			$result .= '<td class="name_user">'.$info["name"].'</td>';
 			$result .= '<td class="rang_user">'.$info["rang"].'</td>';
 			if($info['id'] != $_SESSION['id']){
 				$result .= '<td class="modify_rang_user">';
-				$result .= '<form method="post" action="modify_rang.php" class="post_form">';
-				$result .= '<div><select name="rang">'.$option.'</select>';
-				$result .= '<input type="submit" value="Modifier le rang"/></div>';
+				$result .= '<form method="post" action="modify_user.php" class="post_form">';
+				$result .= '<div><input type="hidden" name="id" value="'.$info['id'].'" /><select name="rang">'.$option.'</select>';
+				$result .= 'Modifier le MDP : <input type="text" name="pass"/>';
+				$result .= '<input type="submit" value="Modifier"/></div>';
 				$result .= '</form>';
 				$result .= '</td>';
 				$result .= '<td class="valid_modify"></td>';
@@ -54,6 +58,12 @@
 			$result .= '</tr>';
 		}
 		$result .= '</table>';
+		$option = '<option value="'.USER.'" selected="selected">Utilisateur</option>';
+		$option .= '<option value="'.EVALU.'">Evaluateur</option>';
+		$option .= '<option value="'.ADMIN.'">Admin</option>';
+		$result .= '<form method="post" action="create_user.php" class="post_form">';
+		$result .= '<div>Nom : <input type="text" name="name"/> MDP : <input type="text" name="pass"/> Rang : <select name="rang">'.$option.'</select> <input type="submit" value="Créer un utilisateur"/></div>';
+		$result .= '</form>';
 		return $result;
 	}
 ?>
