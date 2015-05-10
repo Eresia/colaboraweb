@@ -1,4 +1,7 @@
 <?php
+
+	/*Fichier d'appel de la fonction de suppression d'utilisateur, on vérifie que la personne agissant est bien administrateur, sinon elle est redirigée vers index.php.*/
+
 	session_start();
 	require_once("../define/root_define.php");
 	require_once("../define/admin_define.php");

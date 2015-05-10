@@ -1,3 +1,6 @@
+/*Fichier javascript pour l'animation du système de notations (étoile) et de leur remplissage (demi-étoile ou étoile complète)*/
+
+
 function star_to_default() {
 	var id;
 	for (id in notes){

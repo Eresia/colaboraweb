@@ -1,4 +1,10 @@
 <?php	
+
+	/*
+	Fichier regoupant les fonctions de récupération, affichage, création, supression des posts, commentaires notes et catégories.
+	*/
+
+
 	require_once(SERV_ROOT.'/define/mysql_define.php');
 	require_once(SERV_ROOT.'/define/admin_define.php');
 

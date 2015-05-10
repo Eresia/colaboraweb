@@ -1,4 +1,7 @@
 <?php
+
+	/*Fichier contenant le formulaire de création de post*/
+
 	session_start();
 	require_once("../define/root_define.php");
 	require_once(SERV_ROOT."/define/admin_define.php");

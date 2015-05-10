@@ -1,4 +1,9 @@
 ﻿<?php
+
+	/*Fichier regroupant les fonctions relatives à la partie administration du site.
+	Ces fonctions servent à afficher les formulaires permettant, pour le premier de supprimer et créer des catégories et pour le deuxième de modifier les droits d'un utilisateur
+	, son mot de passe, supprimer cet utilisateur ou en créer un nouveau.*/
+
 	require_once(SERV_ROOT.'/define/mysql_define.php');
 	require_once(SERV_ROOT.'/define/admin_define.php');
 	

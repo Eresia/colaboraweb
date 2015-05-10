@@ -1,4 +1,7 @@
 <?php
+
+	/*Fichier appelant la fonction d'ajout d'utilisateur. On vérifie que la personne agissant est bien administrateur et on la redirige vers index.php si ce n'est pas le cas.*/
+
 	session_start();
 	require_once("../define/root_define.php");
 	require_once(SERV_ROOT."/define/admin_define.php");
