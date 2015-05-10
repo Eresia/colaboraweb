@@ -7,6 +7,8 @@ gestion du site par les administrateurs
 	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
 
+
+
 .admin li{
 	list-style-type: none;
 }
@@ -17,4 +19,78 @@ gestion du site par les administrateurs
 
 .admin a:hover{
 	color : #DB840F;
+}
+
+.space{
+	padding-bottom : 10%;
+}
+
+td.name_category{
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+div{
+	text-align: center;
+	font-weight: bold;
+}
+
+div#admin_category.admin{
+	background-color: #43789E;
+	position: relative;
+	padding-bottom: 80px;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: justify;
+}
+
+
+div#admin_users.admin{
+	background-color: #43789E;
+	position: relative;
+	padding-bottom: 60px;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: justify;
+}
+
+td.delete_category a{
+
+	font-weight: bold;
+	color : #DB840F;
+}
+
+td.delete_category a:hover{
+	color : #CC0000;
+	font-size: 1.09em;
+}
+
+td.delete_user a{
+	color : #DB840F;
+}
+
+td.delete_user a:hover{
+	color : #CC0000;
+	font-size: 1.09em;
+}
+
+
+input{
+	display : block;
+	margin: auto;
+}
+
+select{
+	display : block;
+	margin : auto;
+}
+
+table{
+	text-align: center;
+	display : inline-block;
+	margin : auto;
+}
+
+.submit_cat{
+	margin-top: 3%;
 }
