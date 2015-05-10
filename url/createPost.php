@@ -56,7 +56,7 @@
 		}
 		
 		$result .= '<form method="post" action="confirm_post.php" class="post_form">';
-		$result .= '<div><p>Catégorie : </p> <select name="category" />'.$categories.'</select></div>';
+		$result .= '<div><p>Catégorie : </p> <select name="category">'.$categories.'</select></div>';
 		$result .= '<div><p>URL : </p> <input type="text" name="url" value="'.$url.'" /></div>';
 		$result .= '<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.$description.'</textarea></div>';
 		$result .= '<div><input type="submit" value="Poster" /></div>';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	/*Fichier regroupant les fonctions relatives à la partie administration du site.
 	Ces fonctions servent à afficher les formulaires permettant, pour le premier de supprimer et créer des catégories et pour le deuxième de modifier les droits d'un utilisateur

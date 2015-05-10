@@ -37,8 +37,8 @@
 		else{
 			$avatar = AVATAR_DEFAULT;
 		}
-		$result .= '<form method="post" action="confirm_profil.php" class="profil_form">';
 		$result .= '<img class="img_avatar" src="'.$avatar.'" alt="Avatar" title="Avatar de '.$_SESSION['pseudo'].'" />';
+		$result .= '<form method="post" action="confirm_profil.php" class="profil_form">';
 		$result .= '<div><p>Lien de l\'avatar : </p> <input type="text" name="avatar" value="'.$info['avatar'].'" /></div>';
 		$result .= '<div><p>Nouveau mot de passe : </p> <input type="password" name="pass"/></div>';
 		$result .= '<div><p>Confirmer le mot de passe : </p> <input type="password" name="confirmPass"/></div>';

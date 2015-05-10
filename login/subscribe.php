@@ -14,7 +14,7 @@
 			$result .= '<p class="err">Vous êtes déja connecté</p>';
 		}
 		else{
-			$result .= "<form method=\"post\" action=\"confirm_subscription.php\" class=\"sub_form\">";
+			$result .= "<form method=\"post\" action=\"confirm_subscription.php\" class=\"sub_form\"><div>";
 			if(isset($_GET['pseudo'])){
 				if(!right_pseudo($_GET['pseudo'])){
 					$result .= "<p class=\"err\">Merci de mettre un pseudo valide (entre 3 et 10 caractères)</p>";
@@ -53,7 +53,7 @@
 			$result .= "<label class=\"mdp_s\">Confirmer votre mot de passe : </label><input type=\"password\" name=\"confirmpass\" class=\"mdp_s\"/>";
 			$result .= "<p><input type=\"submit\" value=\"Valider\" /></p>";
 			 
-			$result .= "</form>";
+			$result .= "</div></form>";
 		}
 		
 		$result .= end_content();

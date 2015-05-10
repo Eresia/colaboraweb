@@ -32,14 +32,15 @@
 				$pass = "";
 			}
 			
-			$result .= "<div><label for=\"pseudo\" class=\"ps\">Pseudo : </label><input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" class=\"ps\" /><br/>";
-			$result .= "<label for=\"mdp\" class= \"mdp\">Mot de passe : </label><input type=\"password\" name=\"pass\" value=\"".$pass."\" class=\"mdp\"/>";
+			$result .= "<div><label class=\"ps\">Pseudo : </label><input type=\"text\" name=\"pseudo\" value=\"".$pseudo."\" class=\"ps\" /><br/>";
+			$result .= "<label class= \"mdp\">Mot de passe : </label><input type=\"password\" name=\"pass\" value=\"".$pass."\" class=\"mdp\"/>";
 			if(isset($_SESSION['return'])){
 				$result .= '<input type="hidden" name="return" value="'.$_SESSION['return'].'" />';
 				$_SESSION['return'] = "";
 			}
 			$result .= "<p class=\"okb\"><input type=\"submit\" value=\"Valider\" /></p>";
 			$result .= "<p class=\"subscribe\"><a href=\"subscribe.php\" class=\"subscribe\">S'inscrire</a></p>"; 
+			$result .= "</div>";
 			$result .= "</form>";
 			
 		}
