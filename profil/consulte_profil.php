@@ -1,4 +1,7 @@
 <?php
+
+	/*Fichier contenant la fonction de consultation de profil. On peut ainsi accéder aux informations données par les utilisateurs.*/
+
 	session_start();
 	require_once("../define/root_define.php");
     require_once(SERV_ROOT."/function/base.php");

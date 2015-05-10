@@ -1,4 +1,8 @@
 <?php
+
+	/*Fichier permettant de gérer les erreurs de saisie dans la modification du profil
+	Si aucune erreur, les infos se mettent à jour.*/
+
 	session_start();
 	require_once("../define/root_define.php");
 	require_once(SERV_ROOT."/function/function_profil.php");

@@ -1,4 +1,7 @@
 <?php
+
+	/*Fichier de gestion des erreurs dans l'édition d'un post.*/
+
 	session_start();
 	require_once("../define/root_define.php");
 	require_once(SERV_ROOT."/function/function_post.php");
