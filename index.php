@@ -51,8 +51,8 @@
 		
 		
 		
-		$list_date = array('desc' => 'Du plus r&eacutecent au plus ancien', 'asc' => 'Du plus ancien au plus r&eacutecent');
-		$list_notation = array('none' => 'Peu importe', 'desc' => 'Les mieux not&eacutes', 'asc' => 'Les moins bien not&eacutes');
+		$list_date = array('desc' => 'Du plus récent au plus ancien', 'asc' => 'Du plus ancien au plus récent');
+		$list_notation = array('none' => 'Peu importe', 'desc' => 'Les mieux noté', 'asc' => 'Les moins bien noté');
 		
 		$date = "";
 		$notation = "";
@@ -82,8 +82,8 @@
 		$result .= '<div class="search_url">';
 		
 		$result .= '<form method="get" action="index.php" class="index_form">';
-		$result .= '<p>Cat&eacutegorie : <select name="category">'.$categories.'</select>';
-		$result .= 'Anciennet&eacute : <select name="date">'.$date.'</select>';
+		$result .= '<p>Catégorie : <select name="category">'.$categories.'</select>';
+		$result .= 'Ancienneté : <select name="date">'.$date.'</select>';
 		$result .= 'Notation : <select name="notation">'.$notation.'</select>';
 		$result .= '<input type="submit" value="Rechercher" /></p>';
 		$result .= '</form>';

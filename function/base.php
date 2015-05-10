@@ -79,7 +79,7 @@
 			}
 		}
 		else{
-			$menu .= '<p>Bienvenue Visiteur, vous pouvez vous <a href="'.HTTP_ROOT.'/login/subscribe.php">INSCRIRE</a> ou vous <a href="'.HTTP_ROOT.'/login/login.php">CONNECTER</a> si vous d&eacutesirez poster des liens et des commentaires.</p>';
+			$menu .= '<p>Bienvenue Visiteur, vous pouvez vous <a href="'.HTTP_ROOT.'/login/subscribe.php">INSCRIRE</a> ou vous <a href="'.HTTP_ROOT.'/login/login.php">CONNECTER</a> si vous désirez poster des liens et des commentaires.</p>';
 		}
 		$menu .= '</div>';
         return $menu;

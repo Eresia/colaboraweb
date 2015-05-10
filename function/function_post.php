@@ -114,14 +114,14 @@
 		if(isset($_SESSION['id']) && (($_SESSION['id'] == $post['author']) || ($_SESSION['group'] == ADMIN))){
 			$result .= '<div class="info_post_edit">';
 			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/delete_post.php" class="post_form_del">';
-			$result .= '<input type="hidden" name="id" value="'.$post['id'].'" />';
-			$result .= '<input type="submit" value="Supprimer" />';
+			$result .= '<div><input type="hidden" name="id" value="'.$post['id'].'" />';
+			$result .= '<input type="submit" value="Supprimer" /></div>';
 			$result .= '</form>';
 			$result .= '</div>';
 			$result .= '<div class="info_post_edit">';
 			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/edit_post.php" class="post_form_edit">';
-			$result .= '<input type="hidden" name="id" value="'.$post['id'].'" />';
-			$result .= '<input type="submit" value="Editer" />';
+			$result .= '<div><input type="hidden" name="id" value="'.$post['id'].'" />';
+			$result .= '<input type="submit" value="Editer" /></div>';
 			$result .= '</form>';
 			$result .= '</div>';			
 		}
@@ -190,16 +190,16 @@
 			if(isset($_SESSION['id']) && (($_SESSION['id'] == $comments[$i]['author']) || ($_SESSION['group'] == ADMIN))){
 				$result .= '<div class="info_post_edit">';
 				$result .= '<form method="post" action="'.HTTP_ROOT.'/url/delete_comment.php" class="post_form">';
-				$result .= '<input type="hidden" name="id" value="'.$comments[$i]['id'].'" />';
+				$result .= '<div><input type="hidden" name="id" value="'.$comments[$i]['id'].'" />';
 				$result .= '<input type="hidden" name="url" value="'.$comments[$i]['url'].'" />';
-				$result .= '<input type="submit" value="Supprimer" />';
+				$result .= '<input type="submit" value="Supprimer" /></div>';
 				$result .= '</form>';
 				$result .= '</div>';
 				$result .= '<div class="info_post_edit">';
 				$result .= '<form method="post" action="'.HTTP_ROOT.'/url/edit_comment.php" class="post_form">';
-				$result .= '<input type="hidden" name="id" value="'.$comments[$i]['id'].'" />';
+				$result .= '<div><input type="hidden" name="id" value="'.$comments[$i]['id'].'" />';
 				$result .= '<input type="hidden" name="url" value="'.$comments[$i]['url'].'" />';
-				$result .= '<input type="submit" value="Editer" />';
+				$result .= '<input type="submit" value="Editer" /></div>';
 				$result .= '</form>';
 				$result .= '</div>';			
 			}
