@@ -1,4 +1,11 @@
 <?php
+
+    /*
+    Fichier PHP contenant les principaux éléments d'affichage du site regroupés sous forme de fonction.
+    Les différents menus sont présents ainsi qu'une fonction d'indentation du code (voir indent($code)) permettant de garder un code propre.
+    */
+
+
 	require_once(SERV_ROOT.'/define/mysql_define.php');
 	require_once(SERV_ROOT.'/define/admin_define.php');
 

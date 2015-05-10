@@ -1,4 +1,8 @@
 <?php 
+
+	/*Fichier de gestion des filtres de recherche de posts (affichage du formulaire)*/
+
+
     session_start();
 	require_once("define/root_define.php");
     require_once(SERV_ROOT."/function/base.php");
@@ -99,5 +103,4 @@
 	}
 	
 	echo indent(index_page());
-	//echo index_page();
 ?>
