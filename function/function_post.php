@@ -21,6 +21,25 @@
 		}
 	}
 	
+	function getComment($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$info = $mysql->prepare('SELECT url,comment,author,date FROM comment WHERE id = ?');
+		$info->bind_param('i', $id);
+		$info->execute();
+		$info->bind_result($url, $comment, $author, $date);
+		if($info->fetch()){
+			$info->close();
+			$mysql->close();
+			return array('id' => $id, 'url' => $url, 'comment' => $comment, 'author' => $author, 'date' => $date);
+		}
+		else{
+			$info->close();
+			$mysql->close();
+			return array();
+		}
+	}
+	
 	function get_post_by_category($category=-1, $date="asc", $notation="none"){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
@@ -54,13 +73,13 @@
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
 		$askPage = ($page - 1) * 10;
-		$comments = $mysql->prepare('SELECT comment,author,date FROM comment WHERE url = ? ORDER BY date LIMIT 10 OFFSET ?');
+		$comments = $mysql->prepare('SELECT id, comment,author,date FROM comment WHERE url = ? ORDER BY date LIMIT 10 OFFSET ?');
 		$comments->bind_param('ii', $post, $askPage);
 		$comments->execute();
-		$comments->bind_result($currentComment, $currentAuthor, $currentDate);
+		$comments->bind_result($id, $currentComment, $currentAuthor, $currentDate);
 		$result = array();
 		while($comments->fetch()){
-			$result[] = array('comment' => $currentComment, 'author' => $currentAuthor, 'date' => $currentDate);
+			$result[] = array('id' => $id, 'url' => $post, 'comment' => $currentComment, 'author' => $currentAuthor, 'date' => $currentDate);
 		}
 		$comments->close();
 		$mysql->close();
@@ -162,7 +181,25 @@
 			$result .= '</div>';
 			$result .= '<div class="content_post">';
 			$result .= '<div class="info_post">';
-			$result .= '<p>Posté le : '.$comments[$i]['date'].'</p>';
+			if(isset($_SESSION['id']) && (($_SESSION['id'] == $comments[$i]['author']) || ($_SESSION['group'] == ADMIN))){
+				$result .= '<div class="info_post_edit">';
+				$result .= '<form method="post" action="'.HTTP_ROOT.'/url/delete_comment.php" class="post_form">';
+				$result .= '<input type="hidden" name="id" value="'.$comments[$i]['id'].'" />';
+				$result .= '<input type="hidden" name="url" value="'.$comments[$i]['url'].'" />';
+				$result .= '<input type="submit" value="Supprimer" />';
+				$result .= '</form>';
+				$result .= '</div>';
+				$result .= '<div class="info_post_edit">';
+				$result .= '<form method="post" action="'.HTTP_ROOT.'/url/edit_comment.php" class="post_form">';
+				$result .= '<input type="hidden" name="id" value="'.$comments[$i]['id'].'" />';
+				$result .= '<input type="hidden" name="url" value="'.$comments[$i]['url'].'" />';
+				$result .= '<input type="submit" value="Editer" />';
+				$result .= '</form>';
+				$result .= '</div>';			
+			}
+			$result .= '<div class="info_post_info">';
+			$result .= 'Posté le : '.$comments[$i]['date'].'';
+			$result .= '</div>';
 			$result .= '</div>';
 			$result .= '<div class="subcontent_post">';
 			$result .= '<p>'.$comments[$i]['comment'].'</p>';
@@ -343,6 +380,19 @@
 		return ($nb == 1);
 	}
 	
+	function is_comment($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$prep = $mysql->prepare('SELECT COUNT(id) FROM comment WHERE id = ?');
+		$prep->bind_param('i', $id);
+		$prep->execute();
+		$prep->bind_result($nb);
+		$prep->fetch();
+		$prep->close();
+		$mysql->close();
+		return ($nb == 1);
+	}
+	
 	function create_comment($author, $url, $comment){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
@@ -351,6 +401,26 @@
 		$post->execute();
 		$post->close();
 		
+		$mysql->close();
+	}
+	
+	function edit_comment($id, $comment){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('UPDATE comment SET comment=? WHERE id=?');
+		$post->bind_param('si', $comment, $id);
+		$post->execute();
+		$post->close();
+		$mysql->close();
+	}
+	
+	function delete_comment($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('DELETE FROM comment WHERE id=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
 		$mysql->close();
 	}
 	

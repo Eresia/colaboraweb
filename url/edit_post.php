@@ -5,7 +5,7 @@
 	require_once(SERV_ROOT."/function/function_post.php");
 	
 	function edit_post_page(){
-		$result = beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), "Créer un post");
+		$result = beginPage(array(HTTP_ROOT.'/css/style3.css', HTTP_ROOT.'/css/stylePost.css'), "Editer un post");
 		$result .= begin_content();
 		
 		$info = getPost($_POST['id']);
@@ -24,7 +24,7 @@
 			$_SESSION['description'] = "";
 		}
 		else{
-			$description = $info['description'];
+			$description = str_replace('<br />', "\n", $info['description']);
 		}
 		
 		if(isset($_SESSION['msg'])){
@@ -61,7 +61,7 @@
 		return $result;
 	}
 	
-	if(!isset($_POST['id']) || !isset($_SESSION['id']) || !(($_SESSION['id'] == getPost($_POST['id'])['author']) || ($_SESSION['group'] == ADMIN))){
+	if(!isset($_POST['id']) || !is_url($_POST['id']) || !isset($_SESSION['id']) || !(($_SESSION['id'] == getPost($_POST['id'])['author']) || ($_SESSION['group'] == ADMIN))){
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{

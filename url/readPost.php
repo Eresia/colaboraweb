@@ -74,14 +74,4 @@
 	else{
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	endPage();
 ?>
