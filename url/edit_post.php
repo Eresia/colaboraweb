@@ -61,7 +61,7 @@
 		return $result;
 	}
 	
-	if(!isset($_POST['id']) || !isset($_SESSION['id'])){
+	if(!isset($_POST['id']) || !isset($_SESSION['id']) || !(($_SESSION['id'] == getPost($_POST['id'])['author']) || ($_SESSION['group'] == ADMIN))){
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{

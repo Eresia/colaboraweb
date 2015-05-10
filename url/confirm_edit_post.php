@@ -6,7 +6,7 @@
 	if(!isset($_SESSION['id'])){
 		header('Location: '.HTTP_ROOT.'/login/login.php');
 	}
-	else if(!isset($_POST['category']) || !is_category(intval($_POST['category'])) || !isset($_POST['id']) || !is_url(intval($_POST['id'])) || !isset($_POST['url']) || !isset($_POST['description']) || (getPost($_POST['id'])['author'] != $_SESSION['id'])){
+	else if(!isset($_POST['category']) || !is_category(intval($_POST['category'])) || !isset($_POST['id']) || !is_url(intval($_POST['id'])) || !isset($_POST['url']) || !isset($_POST['description']) || !((getPost($_POST['id'])['author'] == $_SESSION['id']) || ($_SESSION['group'] >= ADMIN))){
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{
