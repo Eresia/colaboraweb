@@ -3,9 +3,10 @@
 	require_once("../define/root_define.php");
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_administration.php");
+	require_once(SERV_ROOT."/function/function_login.php");
 	
 	function administration_page(){
-		$result = beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleAdministration.css"), 'Se connecter');
+		$result = beginPage(array(HTTP_ROOT."/css/style3.css", HTTP_ROOT."/css/styleAdministration.css"), 'Administration');
 		
 		$result .= begin_content();
 		
@@ -17,9 +18,11 @@
 		$result .= '</div>';
 		
 		$result .= '<div class="admin" id="admin_category">';
+		$result .= get_admin_categories();
 		$result .= '</div>';
 		
 		$result .= '<div class="admin" id="admin_users">';
+		$result .= get_admin_users();
 		$result .= '</div>';
 		
 		$result .= end_content();

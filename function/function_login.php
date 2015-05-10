@@ -69,6 +69,30 @@
 			return false;
 		}
     }
+	
+	function delete_user($id){
+		$file = file(LOGIN_FILE);
+		for($i = 0; $i < count($file); $i++){
+			if(intval(explode("\t", $file[$i])[0]) == $id){
+				unset($file[$i]);
+				break;
+			}
+		}
+		file_put_contents(LOGIN_FILE, $file);
+	}
+	
+	function get_users(){
+		$result = array();
+		if(file_exists(LOGIN_FILE)){
+			$file = fopen(LOGIN_FILE, "r");
+			while($line = fgets($file)){
+				$values = explode("\t", $line);
+				$result[] = array('id' => $values[0], 'name' => $values[1], 'rang' => $values[3]);
+			}
+			fclose($file);
+		}
+		return $result;
+	}
     
     function disconnect(){
         if(isset($_SESSION['pseudo'])){

@@ -58,7 +58,7 @@
 				$date .= '<option value="'.$key.'" selected="selected">'.$value.'</option>';
 			}
 			else{
-				$date .= '<option value="'.$key.'">'.$value                   .'</option>';
+				$date .= '<option value="'.$key.'">'.$value.'</option>';
 			}
 		}
 		

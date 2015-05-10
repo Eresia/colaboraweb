@@ -3,12 +3,15 @@ CSS spécifique à administration.php
 gestion du site par les administrateurs
 */
 
+.admin{
+	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+}
+
 .admin li{
 	list-style-type: none;
 }
 
 .admin a{
-	font-family: "Oleo Script", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 	color : #1472CC;
 }
 

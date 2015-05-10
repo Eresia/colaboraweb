@@ -55,18 +55,6 @@
 		$mysql->close();
         return $menu;
     }
-	/*
-	function leftMenu(){
-        $menu = '<div class="l_menu">';
-        if(isset($_SESSION['id'])){
-		$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
-		}
-		else{
-
-		}
-		$menu .= '</div>';
-        return $menu;
-    }*/
     
     function rightMenu(){
         $menu = '<div class="r_menu">';
@@ -116,10 +104,10 @@
 		$choos = rand(0,1);
 
 		if($choos==0){
-			$footer .=  "<p>Thomas LEFEBVRE &amp; Bastien LEPESANT  2015 Copyright : Tous droits r&eacuteserv&eacutes parce que c'est plus facile.</p>";
+			$footer .=  "<p>Thomas LEFEBVRE &amp; Bastien LEPESANT  2015 Copyright : Tous droits réservé parce que c'est plus facile.</p>";
         }
         elseif($choos==1){
-            $footer .=  "<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits r&eacuteserv&eacutes parce que c'est plus facile.</p>";
+            $footer .=  "<p>Bastien LEPESANT &amp; Thomas LEFEBVRE  2015 Copyright : Tous droits réservé parce que c'est plus facile.</p>";
         }		
 	
 		$footer .=  '</div>';
