@@ -37,26 +37,6 @@ li a{
 .sub-content{
 }
 
-/*li.icohtml a{
-  color: #FF7600;
-}
-
-li.icocss a{
-  color: #AF0202;
-}
-
-li.icophp a{
-  color: #0C3474;
-}
-
-li.icosql a{
-  color: #AF6052;
-}
-
-li.icooth a{
-  color: #C9C9C9;
-}*/
-
 .wrap{
   min-height: 100%;
   position: relative;
@@ -83,7 +63,6 @@ li.icooth a{
 
 .titre a:hover{
   color : #1472CC;
-  /*text-decoration: underline;*/
   font-size: 0.3em;
 }
 
@@ -107,7 +86,6 @@ span.gras{
   color : #DB840F;
   position : relative;
   left : 30%;
-  /*background-color: ;*/
 }
 
 .c_menu a:hover{

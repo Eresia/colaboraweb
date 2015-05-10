@@ -80,6 +80,7 @@ td.delete_category a:hover{
 
 td.delete_user a{
 	color : #DB840F;
+	text-align: justify;
 }
 
 td.delete_user a:hover{
@@ -104,6 +105,10 @@ table{
 
 .post_form div{
 	text-align: center;
+}
+
+.post_form{
+	display : block;
 }
 
 
