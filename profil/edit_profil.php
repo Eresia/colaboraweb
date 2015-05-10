@@ -37,6 +37,8 @@
 		$result .= '<form method="post" action="confirm_profil.php" class="profil_form">';
 		$result .= '<img class="img_avatar" src="'.$avatar.'" alt="Avatar" title="Avatar de '.$_SESSION['pseudo'].'" />';
 		$result .= '<div><p>Lien de l\'avatar : </p> <input type="text" name="avatar" value="'.$info['avatar'].'" /></div>';
+		$result .= '<div><p>Nouveau mot de passe : </p> <input type="password" name="pass"/></div>';
+		$result .= '<div><p>Confirmer le mot de passe : </p> <input type="password" name="confirmPass"/></div>';
 		$result .= '<div><p>Description : </p> <textarea rows="5" cols="100" name="description">'.str_replace('<br />', "\n", $info['description']).'</textarea></div>';
 		$result .= '<div><p>Signature : </p> <textarea rows="10" cols="100" name="sign">'.str_replace('<br />', "\n", $info['sign']).'</textarea></div>';
 		$result .= '<div><input type="submit" value="Modifier" /></div>';

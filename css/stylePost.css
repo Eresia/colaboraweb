@@ -60,8 +60,16 @@ formulaire de création d'un post (lien+note)
 .info_post{
 	position: relative;
 	font-size: x-small;
-	padding: 1em;
 	/*border-bottom: 1px solid black;*/
+}
+
+.info_post_info{
+	padding: 1em;
+}
+
+.info_post_edit{
+	float: right;
+	padding: 0.5em;
 }
 
 .subcontent_post{

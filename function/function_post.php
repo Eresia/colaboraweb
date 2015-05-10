@@ -1,5 +1,6 @@
 <?php	
 	require_once(SERV_ROOT.'/define/mysql_define.php');
+	require_once(SERV_ROOT.'/define/admin_define.php');
 
 	function getPost($post){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
@@ -85,14 +86,30 @@
 		$result .= '</div>';
 		$result .= '<div class="content_post">';
 		$result .= '<div class="info_post">';
-		$result .= '<p>Posté le : '.$post['date'].', Catégorie : '.get_category_name($post['category']).'</p>';
+		if(isset($_SESSION['id']) && ($_SESSION['id'] == $post['author'])){
+			$result .= '<div class="info_post_edit">';
+			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/delete_post.php" class="post_form">';
+			$result .= '<input type="hidden" name="id" value="'.$post['id'].'" />';
+			$result .= '<input type="submit" value="Supprimer" />';
+			$result .= '</form>';
+			$result .= '</div>';
+			$result .= '<div class="info_post_edit">';
+			$result .= '<form method="post" action="'.HTTP_ROOT.'/url/edit_post.php" class="post_form">';
+			$result .= '<input type="hidden" name="id" value="'.$post['id'].'" />';
+			$result .= '<input type="submit" value="Editer" />';
+			$result .= '</form>';
+			$result .= '</div>';			
+		}
+		$result .= '<div class="info_post_info">';
+		$result .= 'Posté le : '.$post['date'].', Catégorie : '.get_category_name($post['category']);
+		$result .= '</div>';
 		$result .= '</div>';
 		$result .= '<div class="subcontent_post">';
 		$result .= '<div class="display_url">';
 		$result .= '<p><a href="'.$post['url'].'">'.$post['url'].'</a></p>';
 		$result .= '<p class="para_note">';
 		for($i = 1; $i <= 10; $i++){
-			if($notation){
+			if($notation && isset($_SESSION['group']) && ($_SESSION['group'] >= EVALU)){
 				$result .= '<a href="'.HTTP_ROOT.'/url/confirm_notation.php?id='.$post['id'].'&amp;note='.$i.'"><img id="note_'.$i.'" onmouseover="star_animation('.$i.')" onmouseout="star_to_default()" src="'.HTTP_ROOT.'/images/star_trans.png" alt="Note '.$i.'" title="Note de l\'url" /></a>';
 			}
 			else{
@@ -291,6 +308,26 @@
 		$max->close();
 		$mysql->close();
 		return $result;
+	}
+	
+	function edit_post($id, $category, $url, $description){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('UPDATE url SET category=?, url=?, description=? WHERE id=?');
+		$post->bind_param('issi', $category, $url, $description, $id);
+		$post->execute();
+		$post->close();
+		$mysql->close();
+	}
+	
+	function remove_post($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('DELETE FROM url WHERE id=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$mysql->close();
 	}
 	
 	function is_url($id){

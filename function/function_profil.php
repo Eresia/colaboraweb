@@ -1,5 +1,5 @@
 <?php
-	define("LOGIN_FILE", SERV_ROOT.'/login/login.csv');
+	require_once(SERV_ROOT.'/function/function_login.php');
 	define('AVATAR_DEFAULT', HTTP_ROOT.'/images/avatar_default.gif');
 	
 	define('DESCRIPTION_MAX', 255);
