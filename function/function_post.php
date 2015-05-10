@@ -43,13 +43,13 @@
 	function get_post_by_category($category=-1, $date="asc", $notation="none"){
 		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
 		$mysql->query("SET NAMES UTF8");
-		$request = 'SELECT url.id,url.url,url.description,url.author,url.date,url.category FROM url LEFT JOIN note ON url.id = note.url';
+		$request = 'SELECT url.id,url.url,url.description,url.author,url.date,url.category FROM url LEFT JOIN (SELECT url.id AS URL, 0 AS NOTE FROM url WHERE id NOT IN (SELECT url as NOTE FROM note GROUP BY url) union SELECT url as URL, AVG(note) as NOTE FROM note GROUP BY url) AS NOTE ON url.id = NOTE.url';
 		if($category != -1){
-			$request .= ' WHERE category = ?';
+			$request .= ' WHERE url.category = ?';
 		}
 		$request .= ' ORDER BY';
 		if($notation != 'none'){
-			$request .= ' note.note '.$notation.', url.date '.$date;
+			$request .= ' NOTE.NOTE '.$notation.', url.date '.$date;
 		}
 		else{
 			$request .= ' url.date '.$date;
