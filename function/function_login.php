@@ -102,6 +102,28 @@
 		file_put_contents(LOGIN_FILE, $file);
 	}
 	
+	function delete_user_data($id){
+		$mysql = new MySQLi(DTB_LINK, DTB_USER, DTB_PASS, DTB_NAME);
+		$mysql->query("SET NAMES UTF8");
+		$post = $mysql->prepare('DELETE FROM comment WHERE author=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM note WHERE author=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM url WHERE author=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$post = $mysql->prepare('DELETE FROM profil WHERE user=?');
+		$post->bind_param('i', $id);
+		$post->execute();
+		$post->close();
+		$mysql->close();
+	}
+	
 	function get_users(){
 		$result = array();
 		if(file_exists(LOGIN_FILE)){

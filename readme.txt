@@ -18,4 +18,7 @@ Dans mysql_define.php (Ce sont les 4 paramètres du constructeur de Mysqli) :
 
 URL du site sur le serveur louve.cp : …
 
-Autres : …
+Autres : Trois compte déjà créé :
+Pseudo : User === Mot de Passe : User === Rang : Utilisateur
+Pseudo : Eval === Mot de Passe : Eval === Rang : Evaluateur 
+Pseudo : Admin === Mot de Passe : Admin === Rang : Admin
