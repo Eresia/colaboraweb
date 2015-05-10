@@ -62,7 +62,7 @@
 		$option .= '<option value="'.EVALU.'">Evaluateur</option>';
 		$option .= '<option value="'.ADMIN.'">Admin</option>';
 		$result .= '<form method="post" action="create_user.php" class="post_form">';
-		$result .= '<div>Nom : <input type="text" name="name"/> MDP : <input type="text" name="pass"/> Rang : <select name="rang">'.$option.'</select> <input type="submit" value="Créer un utilisateur"/></div>';
+		$result .= '<div>Nom : <input type="text" name="name"/> MDP : <input type="password" name="pass"/> Rang : <select name="rang">'.$option.'</select> <input type="submit" value="Créer un utilisateur"/></div>';
 		$result .= '</form>';
 		return $result;
 	}

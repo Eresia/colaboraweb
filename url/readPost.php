@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once("../define/root_define.php");
+	require_once(SERV_ROOT."/define/admin_define.php");
     require_once(SERV_ROOT."/function/base.php");
 	require_once(SERV_ROOT."/function/function_profil.php");
 	require_once(SERV_ROOT."/function/function_post.php");
@@ -16,7 +17,7 @@
 		
 		$result .= display_pages($id, $page);
 		
-		if(isset($_SESSION['id'])){
+		if(isset($_SESSION['group']) && ($_SESSION['group'] >= EVALU)){
 			$result .= '<div class="create_comment">';
 			if(strlen($msg) != 0){
 				$result .= '<p>'.$msg.'</p>';

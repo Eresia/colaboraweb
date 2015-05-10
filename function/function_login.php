@@ -78,7 +78,7 @@
 					$line[2] = password_hash($pass, PASSWORD_DEFAULT);
 				}
 				if($rang != -1){
-					$line[3] = $rang.'\n';
+					$line[3] = $rang."\n";
 				}
 				$file[$i] = $line[0];
 				for($j = 1; $j < count($line); $j++){

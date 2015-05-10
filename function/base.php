@@ -1,5 +1,6 @@
 <?php
 	require_once(SERV_ROOT.'/define/mysql_define.php');
+	require_once(SERV_ROOT.'/define/admin_define.php');
 
     function beginPage($css, $titleHead){
         $beginText = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">';
@@ -61,10 +62,10 @@
 		if(isset($_SESSION['id'])){
 			$menu .= '<p>'.$_SESSION['pseudo'].'</p>';
 			$menu .= '<p><a href="'.HTTP_ROOT.'/profil/edit_profil.php">Profil</a></p>';
-			if($_SESSION['group'] == 2 OR $_SESSION['group'] == 3){
-			$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
+			if($_SESSION['group'] >= EVALU){
+				$menu .= '<a href="'.HTTP_ROOT.'/url/createPost.php">Créer un post</a>';
 			}
-			if($_SESSION['group'] == 3){
+			if($_SESSION['group'] == ADMIN){
 				$menu .= '<p><a href="'.HTTP_ROOT.'/administration/administration.php">Administration</a></p>';
 			}
 		}

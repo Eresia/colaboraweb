@@ -9,6 +9,6 @@
 	}
 	else{
 		subscribe($_POST['name'], $_POST['pass'], $_POST['rang']);
-		//header('Location: '.HTTP_ROOT.'/administration/administration.php');
+		header('Location: '.HTTP_ROOT.'/administration/administration.php');
 	}
 ?>

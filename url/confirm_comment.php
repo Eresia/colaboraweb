@@ -3,10 +3,10 @@
 	require_once("../define/root_define.php");
 	require_once(SERV_ROOT."/function/function_post.php");
 	
-	if(!isset($_SESSION['id'])){
+	if(!isset($_SESSION['group'])){
 		header('Location: '.HTTP_ROOT.'/login/login.php');
 	}
-	else if(!isset($_POST['url']) || !is_url(intval($_POST['url'])) || !isset($_POST['comment'])){
+	else if(($_SESSION['group'] < EVALU) || !isset($_POST['url']) || !is_url(intval($_POST['url'])) || !isset($_POST['comment'])){
 		header('Location: '.HTTP_ROOT.'/index.php');
 	}
 	else{

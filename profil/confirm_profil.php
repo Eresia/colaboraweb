@@ -25,7 +25,7 @@
 		header('Location: edit_profil.php?msg='.$msg.'&result=false');
 	}
 	
-	if(isset($_POST['pass']) && isset($_POST['confirmPass'])){
+	if(isset($_POST['pass']) && isset($_POST['confirmPass']) && ($_POST['pass'] != '')){
 		if($_POST['pass'] == $_POST['confirmPass']){
 			if(right_pass($_POST['pass'])){
 				update_user($_SESSION['id'], $_POST['pass']);
@@ -77,7 +77,7 @@
 	
 	if($validAvatar && $validDescription && $validSign){
 		set_info($_SESSION['id'], array('avatar' => $avatar, 'description' => $description, 'sign' => $sign));
-		//$msg = "Mise à jour des info réussi";
-		//header('Location: edit_profil.php?msg='.$msg.'&result=true');
+		$msg = "Mise à jour des info réussi";
+		header('Location: edit_profil.php?msg='.$msg.'&result=true');
 	}	
 ?>
