@@ -18,3 +18,77 @@ gestion du site par les administrateurs
 .admin a:hover{
 	color : #DB840F;
 }
+
+.space{
+	padding-bottom : 10%;
+}
+
+td.name_category{
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+div{
+	text-align: center;
+	font-weight: bold;
+}
+
+div#admin_category.admin{
+	background-color: #43789E;
+	position: relative;
+	padding-bottom: 80px;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: justify;
+}
+
+div#admin_category.admin input{
+	display : block;
+	margin: auto;
+}
+
+div#admin_category.admin select{
+	display : block;
+	margin : auto;
+}
+
+.submit_cat{
+	margin-top: 5%;
+}
+
+div#admin_users.admin{
+	background-color: #43789E;
+	position: relative;
+	padding-bottom: 60px;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: justify;
+}
+
+td.delete_category a{
+	font-weight: bold;
+	color : #DB840F;
+}
+
+td.delete_category a:hover{
+	color : #CC0000;
+	font-size: 1.09em;
+}
+
+td.delete_user a{
+	color : #DB840F;
+}
+
+td.delete_user a:hover{
+	color : #CC0000;
+	font-size: 1.09em;
+}
+
+table{
+	text-align: center;
+	display : inline-block;
+	margin : auto;
+}
+
+
+

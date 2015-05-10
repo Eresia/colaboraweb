@@ -16,7 +16,7 @@
 		$result .= $display_categories;
 		$result .= '</table>';
 		$result .= '<form method="post" action="create_category.php" class="post_form">';
-		$result .= '<div>Nom : <input type="text" name="name"/> Couleur (Hexadecimal) : <input type="text" name="color"/> Catégorie précédente : <select name="previous">'.$categories.'</select> <input type="submit" value="Ajouter une catégorie"/></div>';
+		$result .= '<div>Nom : <input type="text" name="name"/> Couleur (Hexadecimal) : <input type="text" name="color"/> Catégorie précédente : <select name="previous">'.$categories.'</select> <input  class="submit_cat" type="submit" value="Ajouter une catégorie"/></div>';
 		$result .= '</form>';
 		return $result;
 	}

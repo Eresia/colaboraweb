@@ -22,6 +22,8 @@
 		$result .= get_admin_categories();
 		$result .= '</div>';
 		
+		$result .= '<div class="space"></div>';
+
 		$result .= '<div class="admin" id="admin_users">';
 		$result .= get_admin_users();
 		$result .= '</div>';

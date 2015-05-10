@@ -179,3 +179,9 @@ formulaire de création d'un post (lien+note)
 .page a:hover{
 	color : #DB840F;
 }
+
+textarea{
+	height: 99%;
+  	width: 99%;
+	resize : none;
+}

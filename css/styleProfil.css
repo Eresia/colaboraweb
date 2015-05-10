@@ -35,3 +35,9 @@ affichage des profils utilisateurs du site.
 .profil_content:hover{
 
 }
+
+textarea{
+	height: 99%;
+  	width: 99%;
+	resize : none;
+}
